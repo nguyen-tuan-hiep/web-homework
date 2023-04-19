@@ -1,0 +1,151 @@
+#facebook {
+    background-color: #f2f2f2;
+    font-family: SFProText-Regular, Helvetica, Arial, sans-serif;
+    text-align: center;
+}
+
+button:hover,
+.question-mark {
+    cursor: pointer;
+}
+
+.question-mark{
+    opacity: 0.65;
+}
+
+input[type="radio"]:hover {
+    cursor: pointer;
+}
+
+h1 {
+    font-size: 32px;
+    font-weight: bold;
+}
+
+h3 {
+    font-size: 18px;
+    margin-bottom: 20px;
+    color: #606770;
+    font-weight: bold;
+}
+
+
+#c1 {
+    background-color: #ffffff;
+    width: 400px;
+    height: 570px;
+    margin: auto;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 2px 0px 0px 10px rgba(255,255,255,1), 3px 0px 10px 11px rgba(0,0,0,0.2)
+}
+
+#fb-icon {
+    width: 300px;
+    margin: auto;
+    display: block;
+
+}
+
+#input {
+    margin: auto;
+    display: block;
+    margin-top: 10px;
+}
+
+hr {
+    width: 400px;
+    margin: 0;
+    text-align: center;
+}
+
+
+
+#form {
+    margin-top: 20px;
+}
+
+.firstname,
+.surname {
+    width: 170px;
+}
+
+
+.email,
+.password {
+    width: 360px;
+}
+
+.inputHeight {
+    height: 32px;
+}
+
+
+
+.inputLayout {
+    padding: 0 0 0 11px;
+    border-color: #ccd0d5;
+    background: #f5f6f7;
+    line-height: 16px;
+    border: 1px solid #ccd0d5;
+}
+
+.info {
+    text-align: left;
+    margin-top: 10px;
+    padding-left: 12px;
+    color: #606770;
+    font-size: 10px;
+    font-weight: normal;
+    line-height: 20px;
+    margin-bottom: 0;
+    margin-top: 2px;
+}
+
+
+#dob {
+    width: 123px;
+    height: 25px;
+}
+
+
+.gender {
+    width: 123px;
+    height: 25px;
+    border: 1px solid;
+    display: inline-block;
+}
+
+.borderRadius {
+    border-radius: 5px;
+    border: 1px solid #ccd0d5;
+}
+
+
+.more-info {
+    color: #1877f2;
+    text-decoration: none;
+}
+
+#signup-btn {
+    text-align: center;
+    display: inline-block;
+    width: 110px;
+    height: 40px;
+    color: white;
+    background-color: #00a400;
+    vertical-align: middle;
+    font-weight: bold;
+    font-size: large;
+}
+
+#acc-already {
+    color: #1877f2;
+    font-weight: bold;
+    font-size: large;
+    text-decoration: none;
+}
+
+.lineHeight {
+    line-height: 15px;
+}

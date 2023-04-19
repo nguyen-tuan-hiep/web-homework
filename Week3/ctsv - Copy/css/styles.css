@@ -1,0 +1,161 @@
+*{
+    box-sizing: border-box;
+}
+
+body {
+    /* position: absolute; */
+    background-color: #f5f5f5;
+    padding: 200px 100px 200px 100px;
+}
+
+#basic-info,
+#status,
+#right-div {
+    background-color: white;
+    border-radius: 20px;
+    box-shadow: 0px 0px 0px 0px rgba(255, 255, 255, 1), 3px 0px 10px 2px rgba(0, 0, 0, 0.2)
+}
+
+#img {
+    position: relative;
+    margin-bottom: 15%;
+}
+
+.img-hover-zoom,
+#hust-png {
+    overflow: hidden;
+    transition: transform .5s ease;
+    border-radius: 15px 15px 0 0;
+}
+
+.img-hover-zoom:hover #hust-png {
+    transform: scale(1.1);
+    /* filter: alpha(opacity=80); */
+    /* opacity: .8; */
+    filter: brightness(105%);
+}
+
+#me {
+    position: absolute;
+    top: 55%;
+    left: 8%;
+    width: 45%;
+    border: 5px solid white;
+    border-radius: 500px;
+}
+
+#name-class-email,
+#status {
+    padding: 20px 30px 20px 30px;
+    margin-top: 20px;
+    /* width: 100%; */
+    word-wrap: break-word;
+}
+
+.btn-group button {
+    border: 1px solid rgb(235, 239, 243);
+    padding: 6px 15px;
+    /* Some padding */
+    cursor: pointer;
+    /* Pointer/hand icon */
+    float: left;
+    /* Float the buttons side by side */
+    margin-bottom: 0;
+    /* border-bottom: none; */
+}
+
+/* Clear floats (clearfix hack) */
+.btn-group:after {
+    content: "";
+    clear: both;
+    display: table;
+}
+
+.btn:hover {
+    color: #409eff;
+}
+
+.btn-group button:not(:last-child) {
+    border-right: none;
+    /* Prevent double borders */
+}
+
+#study-status {
+    color: rgb(0, 150, 136)
+}
+
+#grade {
+    margin-top: 10px;
+}
+
+#right-div {
+    padding: 20px 20px 30px 20px;
+}
+
+#personal-info {
+    margin-top: 20px;
+}
+
+.info {
+    font-size: larger;
+    font-weight: bold;
+    text-decoration: 2px underline;
+    text-underline-position: under;
+    text-decoration-color: #dfdfdf;
+}
+
+.indent {
+    margin-left: 12px;
+}
+
+.chartMenu p {
+    padding: 10px;
+    font-size: 20px;
+}
+
+.chart {
+    font-size: larger;
+    font-weight: bold;
+}
+
+.chartCard {
+    /* display: flex;
+    align-items: center;
+    justify-content: center; */
+    height: 400px;
+}
+
+canvas {
+
+    width: 550px !important;
+    height: 350px !important;
+
+}
+
+.chartBox {
+    /* width: 800px; */
+    margin-bottom: 300px;
+    padding: 20px;
+    border-radius: 20px;
+}
+
+button{
+    height: 35px
+}
+
+.btn:focus {
+    border-bottom: none;
+    color: #409eff;
+}
+
+#trang-thai:active {
+    color: #409eff;
+}
+
+/* button {
+    margin-left: -10px;
+    background: white;
+    padding: 10px 20px 10px 20px;
+    border: 1px solid rgb(223, 223, 223);
+    cursor: pointer;
+} */
