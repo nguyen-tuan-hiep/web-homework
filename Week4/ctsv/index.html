@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hồ sơ - HUST</title>
+    <link rel="icon" type="image/x-icon" href="./images/favicon.ico">
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="./css/styles.css">
 </head>
@@ -37,7 +38,7 @@
                     <div>Họ tên: Nguyễn Tuấn Hiệp</div>
                     <div>Lớp: ICT 01-K65</div>
                     <div>Email: hiep.nt205151@sis.hust.edu.vn</div>
-                    <div>Email cá nhân: hiep@gmail.com</div>
+                    <div>Email cá nhân: hiep454546@gmail.com</div>
                 </div>
             </div>
 
@@ -47,12 +48,14 @@
                 <!-- Trang thai, quan ly button -->
                 <div class="btn-group">
                     <span>
-
+                        <!--group these buttons as radio button group-->
                         <button onclick="ShowScoreStatus()" id="trang-thai" class="btn"
                             style="width: 35%; border-radius: 8px 0 0 0; border-bottom: none;">Trạng
                             thái</button>
-                        <button onclick="HideScoreStatus()" class="btn" id="tem"
+                        <button onclick="HideScoreStatus()" id="tem" class="btn"
                             style="width: 30%; border-radius: 0 8px 0 0;">Quản lý</button>
+
+
                     </span>
                     <span>
                         <button
@@ -69,6 +72,7 @@
                     <div>Mức cảnh báo: M0</div>
                     <div>Trình độ: 2</div>
                 </div>
+
             </div>
         </div>
 
@@ -81,11 +85,15 @@
                         <button onclick="ShowPersonalInfo()" id="ly-lich" class="btn"
                             style="width: 10%;  border-radius: 8px 0 0 0; border-bottom: none;">Lý
                             lịch</button>
-                        <button onclick="HidePersonalInfo()" class="btn" style="width: 15%;">Quyết định</button>
-                        <button onclick="HidePersonalInfo()" class="btn" style="width: 17%;">Khen thưởng</button>
-                        <button onclick="HidePersonalInfo()" class="btn" style="width: 11%;">Liên hệ</button>
-                        <button onclick="HidePersonalInfo()" class="btn" style="width: 13%;">Nhận xét</button>
-                        <button onclick="HidePersonalInfo()" class="btn"
+                        <button onclick="HidePersonalInfo('quyet-dinh')" id="quyet-dinh" class="btn"
+                            style="width: 15%;">Quyết định</button>
+                        <button onclick="HidePersonalInfo('khen-thuong')" id="khen-thuong" class="btn"
+                            style="width: 17%;">Khen thưởng</button>
+                        <button onclick="HidePersonalInfo('lien-he')" id="lien-he" class="btn" style="width: 11%;">Liên
+                            hệ</button>
+                        <button onclick="HidePersonalInfo('nhan-xet')" id="nhan-xet" class="btn"
+                            style="width: 13%;">Nhận xét</button>
+                        <button onclick="HidePersonalInfo('hoat-dong-tham-gia')" id="hoat-dong-tham-gia" class="btn"
                             style="border-radius: 0 8px 0 0; width: 24%;">Hoạt động tham
                             gia</button>
                     </span>
@@ -151,7 +159,7 @@
                         <div>Liên hệ: 1234567890</div>
 
                         <!-- Mother -->
-                        <div class="my-3"><b>Họ và tên mẹ: NGUYỄN THỊ PHƯƠNG THẢO</b></div>
+                        <div class="my-3"><b>Họ và tên mẹ: TRẦN HÀ LINH</b></div>
                         <div class="grid grid-cols-3">
                             <div class="...">
                                 <div>Dân tộc: Kinh</div>
@@ -166,7 +174,7 @@
                                 <div>Nghề nghiệp:</div>
                             </div>
                         </div>
-                        <div>Địa chỉ thường trú: PHƯỜNG HÀNG MÃ, QUẬN HOÀN KIẾM, THÀNH PHỐ HÀ NỘI</div>
+                        <div>Địa chỉ thường trú: 30 CỬA ĐÔNG, PHƯỜNG HÀNG MÃ, QUẬN HOÀN KIẾM, THÀNH PHỐ HÀ NỘI</div>
                         <div>Liên hệ:</div>
 
                         <!-- Other relative information -->
@@ -176,7 +184,7 @@
                                 <div><b>Thuộc hộ:</b></div>
                             </div>
                             <div class="...">
-                                <div><b>Số xổ:</b></div>
+                                <div><b>Số sổ:</b></div>
                             </div>
                         </div>
                     </div>
@@ -187,220 +195,17 @@
 
 
     <!-- Chart -->
-    <div class="grid grid-cols-2 gap-10">
-
-        <!-- Left chart -->
+    <div class="grid grid-cols-2 gap-5" style="margin-top: 20px; margin-bottom: 60px;">
         <div class="...">
-            <div class="my-5 chart">Biểu đồ học tập</div>
-
-            <div class="chartCard">
-                <div class="chartBox">
-                    <canvas id="chart-hoc-tap"></canvas>
-                </div>
-                <script type="text/javascript"
-                    src="https://cdn.jsdelivr.net/npm/chart.js/dist/chart.umd.min.js"></script>
-                <script>
-
-                    var data = {
-                        labels: [
-                            '20201',
-                            '20202',
-                            '20211',
-                            '20212',
-                            '20221',
-                        ],
-                        datasets: [{
-                            type: 'line',
-                            label: 'CPA',
-                            data: [3.59, 3.58, 3.7, 3.6, 3.5],
-                            yAxisID: 'line-y-axis',
-                            borderColor: '#02A8A8',
-                            backgroundColor: '#f5f5f5',
-                            borderWidth: 2,
-                        }, {
-                            type: 'line',
-                            label: 'GPA',
-                            data: [3.59, 3.57, 3.3, 3.35, 3.5],
-                            yAxisID: 'line-y-axis',
-                            borderColor: '#AA77FF',
-                            backgroundColor: '#f5f5f5',
-                            borderWidth: 2,
-                        }, {
-                            label: 'TC tích lũy',
-                            data: [17, 31, 46, 63, 80],
-                            yAxisID: 'bar-y-axis',
-                            borderColor: '#27AE60',
-                            backgroundColor: '#27AE60',
-                        }, {
-                            label: 'TC nợ',
-                            data: [0, 0, 0, 0, 0],
-                            yAxisID: 'bar-y-axis',
-                            borderColor: '#FFA259',
-                            backgroundColor: '#FFA259'
-                        }]
-                    };
-
-                    var config = {
-                        type: 'bar',
-                        data: data,
-                        options: {
-                            plugins: {
-                                legend: {
-                                    position: 'bottom',
-                                },
-                            },
-                            responsive: true,
-                            title: {
-                                display: false,
-                                text: 'Chart.js Combo Bar Line Chart'
-                            },
-                            interaction: {
-                                mode: 'nearest',
-                                axis: 'x',
-                                intersect: false,
-                            },
-                            tooltips: {
-                                mode: 'index',
-                                intersect: false
-                            },
-                            scales: {
-                                x: {
-                                    grid: {
-                                        display: false,
-                                    },
-                                    stacked: true,
-                                },
-                                'bar-y-axis': {
-                                    type: 'linear',
-                                    display: true,
-                                    position: 'left',
-                                    max: 200,
-                                    min: 0,
-                                    ticks: {
-                                        stepSize: 50
-                                    },
-                                    // name of the axis on top of axis
-                                    title: {
-                                        display: true,
-                                        text: 'TC tích lũy',
-                                        font: {
-                                            size: 14,
-                                            weight: 'bold'
-                                        },
-                                    },
-
-
-                                },
-                                'line-y-axis': {
-                                    type: 'linear',
-                                    display: true,
-                                    position: 'right',
-                                    max: 4,
-                                    min: 0,
-                                    ticks: {
-                                        stepSize: 0.5
-                                    },
-                                    title: {
-                                        display: true,
-                                        text: 'Điểm',
-                                        font: {
-                                            size: 14,
-                                            weight: 'bold'
-                                        }
-                                    },
-
-                                },
-                            },
-
-                        },
-                    };
-
-                    var myChart = new Chart(
-                        document.getElementById('chart-hoc-tap'),
-                        config
-                    );
-
-                    // var chartVersion = document.getElementById('chartVersion');
-                    // chartVersion.innerText = Chart.version;
-                </script>
-            </div>
-
-
+            <div class="font-bold text-lg" style="margin-bottom: 20px; width: 50%;">Biểu đồ học tập</div>
+            <img src="images/chart-hoc-tap.png" alt="Biểu đồ học tập">
         </div>
 
-        <!-- Right chart -->
         <div class="...">
-            <div class="my-5 chart">Biểu đồ rèn luyện</div>
-            <div class="chartCard">
-                <div class="chartBox">
-                    <canvas id="chart-ren-luyen"></canvas>
-                </div>
-                <script>
-                    var data = {
-                        labels: [
-                            '2020-1',
-                            '2020-2',
-                            '2021-1',
-                            '2021-2'
-                        ],
-                        datasets: [{
-                            type: 'line',
-                            label: 'Điểm rèn luyện',
-                            data: [89, 96, 100, 91],
-                            yAxisID: 'line-y-axis',
-                            borderColor: '#02A8A8',
-                            backgroundColor: '#f5f5f5',
-                            borderWidth: 2,
-                        }]
-                    };
-
-                    var config = {
-                        data: data,
-                        options: {
-                            responsive: true,
-                            plugins: {
-                                legend: {
-                                    position: 'bottom',
-                                },
-                            },
-                            tooltips: {
-                                mode: 'index',
-                                intersect: false
-                            },
-                            scales: {
-                                'line-y-axis': {
-                                    type: 'linear',
-                                    display: true,
-                                    position: 'left',
-                                    max: 100,
-                                    min: 0,
-                                    ticks: {
-                                        stepSize: 20
-                                    },
-                                },
-                                x: {
-                                    offset: true,
-                                    grid: {
-                                        display: false,
-                                    },
-
-                                }
-
-                            }
-                        }
-                    };
-
-                    var myChart = new Chart(
-                        document.getElementById('chart-ren-luyen'),
-                        config
-                    );
-
-                    // var chartVersion = document.getElementById('chartVersion');
-                    // chartVersion.innerText = Chart.version;
-                </script>
-            </div>
+            <div class="font-bold text-lg" style="margin-bottom: 10px; width: 50%;">Biểu đồ rèn luyện</div>
+            <img src="images/chart-ren-luyen.png" alt="Biểu đồ rèn luyện">
         </div>
-    </div>`
+    </div>
     <script src="index.js"></script>
 </body>
 
