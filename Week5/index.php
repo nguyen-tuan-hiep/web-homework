@@ -21,8 +21,9 @@
             $nameErr = "Name is required";
         } else {
             $name = test_input($_POST["name"]);
-            if ($name == "") $nameErr = "A string containing only spaces is not valid";
-            if (!preg_match("/^[a-zA-Z-' ]*$/", $name)) {
+            if (empty($name)) {
+                $nameErr = "A string containing only spaces is not valid";
+            } else if (!preg_match("/^([a-zA-ZÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀỂưăạảấầẩẫậắằẳẵặẹẻẽềềểỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợụủứừỬỮỰỲỴÝỶỸửữựỳỵỷỹ\s]+)$/i", $name)) {
                 $name = "";
                 $nameErr = "Only letters and white space allowed";
             }
@@ -71,8 +72,12 @@
         <br><br>
         <input type="submit" name="submit" value="Submit">
         <br><br>
-        <h1 class="notification"><?php echo $successNoti;
-                                    echo $failNoti; ?></h1>
+        <h1 class="notification">
+            <?php
+            echo $successNoti;
+            echo $failNoti;
+            ?>
+        </h1>
     </form>
 
 
