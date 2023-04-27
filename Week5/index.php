@@ -12,15 +12,15 @@
             background-color: #f5f5f5;
         }
 
-        h1 {
+        h2 {
             text-align: center;
         }
 
         form {
             background-color: white;
-            max-width: 600px;
+            max-width: 500px;
             margin: 0 auto;
-            padding:20px;
+            padding: 10px 20px;
             border-radius: 10px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
         }
@@ -49,8 +49,9 @@
             border: none;
             border-radius: 5px;
             padding: 10px;
+            font-size: 16px;
             cursor: pointer;
-            transition: background-color 0.2s ease-in-out;  
+            transition: background-color 0.2s ease-in-out;
         }
 
         input[type="submit"]:hover {
@@ -59,12 +60,12 @@
 
         .error {
             color: red;
-            font-size: 0.8em;
+            font-size: 13px;
         }
 
         .require {
             color: red;
-            font-size: 1em;
+            font-size: 13px;
         }
 
         .notification {
@@ -84,7 +85,6 @@
 </head>
 
 <body>
-
     <?php
     $name = $email = $comment = "";
     $nameErr = $emailErr = "";
@@ -109,7 +109,7 @@
             if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
                 $emailErr = "*Invalid email format";
                 $email = "";
-                $failNoti = "Invalid data!";
+                $failNoti = "Please try again!";
             }
         }
 
@@ -119,7 +119,7 @@
             $comment = test_input($_POST["comment"]);
         if (!empty($name) && !empty($email))
             $successNoti = "The data you submitted has been recognized!";
-        else $failNoti = "Invalid data!";
+        else $failNoti = "Please try again!";
     }
 
     function test_input($data)
@@ -132,10 +132,10 @@
     ?>
 
     <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
-        <h1>PHP FORM</h1>
-        <p style="text-align: center" class="require">* required field</p>
+        <h2>PHP FORM</h2>
+        <p class="require">* required field</p>
         <label for="name">Fullname <span class="error">*</span></label>
-        <input type="text" name="name" id="name" placeholder="Your name">
+        <input type="text" name="name" id="name" placeholder="Your fullname">
         <span class="error"><?php echo $nameErr; ?></span>
         <br><br>
         <label for="email">Email <span class="error">*</span></label>
@@ -143,18 +143,23 @@
         <span class="error"><?php echo $emailErr; ?></span>
         <br><br>
         <label for="comment">Comment</label>
-        <textarea name="comment" id="comment" cols="30" rows="10"></textarea>
-        <br><br>
+        <textarea name="comment" id="comment" cols="30" rows="8"></textarea>
         <div style="text-align: center;">
-            <input type="submit" name="submit" value="Submit" >
+            <input type="submit" name="submit" value="Submit">
             <!-- <button>Submit</button> -->
-            <br><br>
-            <h1 class="notification">
-                <?php
-                echo $successNoti;
-                echo $failNoti;
-                ?>
-            </h1>
+            <br>
+            <h4 class="notification">
+                <span class="success">
+                    <?php
+                    echo $successNoti;
+                    ?>
+                </span>
+                <span class="fail">
+                    <?php
+                    echo $failNoti;
+                    ?>
+                </span>
+            </h4>
         </div>
     </form>
 
