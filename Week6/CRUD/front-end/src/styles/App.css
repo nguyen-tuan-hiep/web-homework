@@ -67,5 +67,7 @@ table {
 }
 
 label {
+  position: relative;
   font-size: 18px;
+  left: 3px;
 }

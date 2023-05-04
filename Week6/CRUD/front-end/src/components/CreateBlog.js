@@ -29,16 +29,25 @@ const CreateBlog = ({blogs, setBlogs}) => {
     return (
         <div>
             <div>Create new blog</div>
-            <label htmlFor="title">Title: </label>
-            <input id="title" type={"text"} value={title} onChange={(event) => handleOnChange(event, setTitle)}></input>
-            <br/>
-            <label htmlFor="body">Body: </label>
-            <input id="body" type={"text"} value={body} onChange={(event) => handleOnChange(event, setBody)}></input>
-            <br/>
-            <label htmlFor="image">Image: </label>
-            <input id="image" type={"text"} value={image} onChange={(event) => handleOnChange(event, setImage)}></input>
-            <br/>
-            <button style={{margin: '10px'}} type={"submit"} onClick={() => {handleOnClick()}}>Create</button>
+            <form>
+                <label htmlFor="title">Title: </label>
+                <input id="title" type={"text"} value={title}
+                       onChange={(event) => handleOnChange(event, setTitle)}></input>
+                <br/>
+                <label htmlFor="body">Body: </label>
+                <input id="body" type={"text"} value={body}
+                       onChange={(event) => handleOnChange(event, setBody)}></input>
+                <br/>
+                <label htmlFor="image">Image: </label>
+                <input id="image" type={"text"} value={image}
+                       onChange={(event) => handleOnChange(event, setImage)}></input>
+                <br/>
+                <button style={{margin: '10px'}} type={"submit"} onClick={() => {
+                    handleOnClick()
+                }}>Create
+                </button>
+            </form>
+
         </div>
     )
 }
