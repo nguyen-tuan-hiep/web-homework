@@ -1,3 +1,10 @@
 ﻿# simple-CRUD-hook-nodejs
-- Guide: 'npm start' on both front-end and back-end folder
-- React must run on port 3001 and NodeJS on port 3000
+- For front-end:
+  + Open terminal on folder front-end
+  + 'npm i axios'
+  + 'npm i react-router-dom'
+  + 'npm start'
+- For back-end:
+  + Open terminal on folder back-end
+  + 'npm start'
+- React must run on port 3000 and NodeJS on port 3001
