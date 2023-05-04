@@ -14,7 +14,7 @@ const UpdateBlog = ({setBlogs}) => {
 
     function handleOnClick(id) {
         const blog = {title, body, image};
-        axios.put(`${non_id_url}${id}`, blog)
+        axios.patch(`${non_id_url}${id}`, blog)
             .then(response => {
                 if (!response.data.message)
                     setBlogs(response.data);
