@@ -10,6 +10,8 @@ import {
 import { useState, useEffect } from "react";
 import { getBlog, updateBlog } from "../service/api";
 import { useNavigate, useParams } from "react-router-dom";
+import SaveIcon from '@mui/icons-material/Save';
+import CancelIcon from "@mui/icons-material/Cancel";
 
 const Container = styled(FormGroup)`
   width: 50%;
@@ -21,11 +23,32 @@ const Container = styled(FormGroup)`
 
 const StyledButton = styled(Button)`
   width: 35%;
-  display: block;
-  margin: auto;
+  margin-left: 65%;
   height: 50px;
   margin-top: 20px;
   font-size: 16px;
+  display: flex;
+  background-color: #394867;
+
+  &:hover {
+    background-color: #606c85;
+  }
+`;
+
+const CancelButton = styled(Button)`
+  width: 35%;
+  height: 50px;
+  margin-left: 0%;
+  margin-top: 20px;
+  font-size: 16px;
+  display: flex;
+  position: absolute;
+  border-color: #394867;
+  color: #394867;
+  &:hover {
+    background-color: #d8d8d8;
+    border-color: #394867;
+  }
 `;
 
 const initialFormState = { title: "", body: "", image: "" };
@@ -55,7 +78,11 @@ const EditBlog = () => {
 
   return (
     <Container>
-      <Typography variant="h4" color="initial" style={{ textAlign: "center" }}>
+      <Typography
+        variant="h4"
+        color="initial"
+        style={{ textAlign: "center", fontWeight: "bold", color: "#394867" }}
+      >
         Update blog
       </Typography>
       <FormControl>
@@ -83,9 +110,19 @@ const EditBlog = () => {
         />
       </FormControl>
       <FormControl>
-        <StyledButton onClick={() => addBlogDetails()} variant="contained">
-          Save changes
-        </StyledButton>
+        <span>
+          <CancelButton
+            onClick={() => navigate("/")}
+            variant="outlined"
+            startIcon={<CancelIcon />}
+          >
+            Cancel
+          </CancelButton>
+
+          <StyledButton onClick={() => addBlogDetails()} variant="contained" startIcon={<SaveIcon />}>
+            Save changes
+          </StyledButton>
+        </span>
       </FormControl>
     </Container>
   );
