@@ -8,7 +8,7 @@ const blogRouter = require("./routes/blog.router");
 dotenv.config();
 
 const app = express();
-const PORT = process.env.PORT || 3001;
+const PORT = process.env.PORT || 8080;
 
 // Connect to MongoDB database
 mongoose
