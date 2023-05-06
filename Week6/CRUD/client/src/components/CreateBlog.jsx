@@ -26,7 +26,7 @@ const StyledButton = styled(Button)`
   height: 50px;
   margin-top: 20px;
   font-size: 18px;
-`
+`;
 
 const initialFormState = { title: "", body: "", image: "" };
 
@@ -46,7 +46,7 @@ const AddBlog = () => {
   return (
     <Container>
       <Typography variant="h4" color="initial" style={{ textAlign: "center" }}>
-      Create new blog
+        Create new blog
       </Typography>
       <FormControl>
         <InputLabel>Title</InputLabel>
