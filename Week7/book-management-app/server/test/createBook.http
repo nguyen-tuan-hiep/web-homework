@@ -1,0 +1,16 @@
+POST http://localhost:8080/books
+Content-Type: application/json
+
+{
+  "title": "To Kill a Mockingbird",
+  "description": "A novel set in the Depression-era South about a lawyer defending a black man accused of rape.",
+  "author": "Harper Lee",
+  "genre": "Literary fiction",
+  "year": 1960,
+  "pages": 281,
+  "publisher": "J. B. Lippincott & Co.",
+  "image_url": "https://www.example.com/images/to-kill-a-mockingbird.jpg",
+  "isbn": "978-0-446-31078-9",
+  "category": "Classics",
+  "price": 12.99
+}
