@@ -7,13 +7,10 @@ import {
   styled,
 } from "@mui/material";
 import { useState, useEffect } from "react";
-import {
-  getBookByIdController,
-  updateBookController,
-} from "../controllers/book.controller";
+import { getBookByIdController, updateBookController } from "./book.controller";
 import { useNavigate, useParams } from "react-router-dom";
-import CancelButton from "./button/CancelButton";
-import SaveChangesButton from "./button/SaveChangesButton";
+import CancelButton from "../Button/CancelButton";
+import SaveChangesButton from "../Button/SaveChangesButton";
 
 const Container = styled(FormGroup)`
   width: 50%;

@@ -1,10 +1,11 @@
 import React from "react";
-import Header from "./components/Header";
-import GetAllBooks from "./components/GetAllBooks";
-import CreateBook from "./components/CreateBook";
+import Header from "./components/Layout/Header";
+import GetAllBooks from "./components/Books/GetAllBooks";
+import CreateBook from "./components/Books/CreateBook";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import UpdateBook from "./components/UpdateBook";
-import Footer from "./components/Footer";
+import UpdateBook from "./components/Books/UpdateBook";
+import Footer from "./components/Layout/Footer";
+import NotFound from "./components/ErrorPage/NotFound";
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
           <Route path="/" element={<GetAllBooks />} />
           <Route path="/create" element={<CreateBook />} />
           <Route path="/update/:id" element={<UpdateBook />}></Route>
+          <Route path="*" element={<NotFound />}></Route>
         </Routes>
       </BrowserRouter>
       <Footer />

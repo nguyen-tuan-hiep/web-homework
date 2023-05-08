@@ -8,8 +8,7 @@ const StyledButton = styled(Button)`
   margin-top: 20px;
   font-size: 16px;
   display: flex;
-  background-color: #394867;
-
+  background-color: #4d5a76;
   &:hover {
     background-color: #606c85;
   }
@@ -18,13 +17,13 @@ const StyledButton = styled(Button)`
 const CreateButton = ({ onClick }) => {
   return (
     <StyledButton
-    onClick={onClick}
-    variant="contained"
-    startIcon={<AddCircleOutlineIcon />}
-  >
-    Create
-  </StyledButton>
-  )
+      onClick={onClick}
+      variant="contained"
+      startIcon={<AddCircleOutlineIcon />}
+    >
+      Create
+    </StyledButton>
+  );
 };
 
 export default CreateButton;

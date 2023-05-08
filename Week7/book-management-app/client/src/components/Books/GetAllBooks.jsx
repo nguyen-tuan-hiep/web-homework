@@ -6,13 +6,10 @@ import {
   TableCell,
   styled,
 } from "@mui/material";
-import {
-  getAllBooksController,
-  deleteBookController,
-} from "../controllers/book.controller";
 import { useEffect, useState } from "react";
-import DeleteButton from "./button/DeleteButton";
-import UpdateButton from "./button/UpdateButton";
+import { getAllBooksController, deleteBookController } from "./book.controller";
+import DeleteButton from "../Button/DeleteButton";
+import UpdateButton from "../Button/UpdateButton";
 
 const StyledTable = styled(Table)`
   width: 90%;
@@ -22,7 +19,7 @@ const StyledTable = styled(Table)`
 `;
 const StyledTableBody = styled(TableRow)`
   & > td {
-    font-size: 18px;
+    font-size: 16px;
   }
   &:nth-of-type(odd) {
     background-color: ${({ theme }) => theme.palette.action.hover};
@@ -33,13 +30,17 @@ const StyledTableBody = styled(TableRow)`
 `;
 
 const StyledTableHead = styled(TableRow)`
-  background: #394867;
+  background: #4d5a76;
   & > th {
     color: #fff;
-    font-size: 20px;
+    font-size: 18px;
     text-align: center;
     font-weight: 600;
   }
+`;
+
+const StyledTableCell = styled(TableCell)`
+  border-right: 1px solid #c4c8d1;
 `;
 
 const GetAllBooks = () => {
@@ -62,55 +63,65 @@ const GetAllBooks = () => {
     <StyledTable>
       <TableHead>
         <StyledTableHead>
-          <TableCell style={{ borderRadius: "15px 0 0 0" }}>Title</TableCell>
-          <TableCell>Author</TableCell>
-          <TableCell>Description</TableCell>
-          <TableCell>Publisher</TableCell>
-          <TableCell>Year</TableCell>
-          <TableCell>Category</TableCell>
-          <TableCell>Genre</TableCell>
-          <TableCell>Pages</TableCell>
-          <TableCell>Price</TableCell>
-          <TableCell>Image</TableCell>
-          <TableCell style={{ borderRadius: "0 15px 0 0" }}>Actions</TableCell>
+          <StyledTableCell style={{ borderRadius: "15px 0 0 0" }}>
+            Title
+          </StyledTableCell>
+          <StyledTableCell>Author</StyledTableCell>
+          <StyledTableCell>Description</StyledTableCell>
+          <StyledTableCell>Publisher</StyledTableCell>
+          <StyledTableCell>Year</StyledTableCell>
+          <StyledTableCell>Category</StyledTableCell>
+          <StyledTableCell>Genre</StyledTableCell>
+          <StyledTableCell>Pages</StyledTableCell>
+          <StyledTableCell>Price</StyledTableCell>
+          <StyledTableCell>Image</StyledTableCell>
+          <TableCell style={{ borderRadius: "0 15px 0 0", width: "10px" }}>
+            Actions
+          </TableCell>
         </StyledTableHead>
       </TableHead>
       <TableBody>
         {books.map((book) => (
           <StyledTableBody key={book._id}>
-            <TableCell
+            <StyledTableCell
               style={{
-                maxWidth: "10%",
+                maxWidth: "120px",
                 wordWrap: "break-word",
                 fontWeight: "bold",
-                padding: "30px",
+                padding: "25px",
               }}
             >
               {book.title}
-            </TableCell>
-            <TableCell
+            </StyledTableCell>
+            <StyledTableCell
               style={{
-                maxWidth: "10%",
                 wordWrap: "break-word",
+                maxWidth: "100px",
               }}
             >
               {book.author}
-            </TableCell>
-            <TableCell
+            </StyledTableCell>
+            <StyledTableCell
               style={{
-                maxWidth: "20%",
+                maxWidth: "250px",
                 wordWrap: "break-word",
               }}
             >
               {book.description}
-            </TableCell>
-            <TableCell style={{ maxWidth: "8%" }}>{book.publisher}</TableCell>
-            <TableCell>{book.year}</TableCell>
-            <TableCell style={{ maxWidth: "8%" }}>{book.category}</TableCell>
-            <TableCell style={{ maxWidth: "8%" }}>{book.genre}</TableCell>
-            <TableCell>{book.pages}</TableCell>
-            <TableCell>{book.price}</TableCell>
-            <TableCell>
+            </StyledTableCell>
+            <StyledTableCell style={{ maxWidth: "60px" }}>
+              {book.publisher}
+            </StyledTableCell>
+            <StyledTableCell>{book.year}</StyledTableCell>
+            <StyledTableCell style={{ maxWidth: "40px" }}>
+              {book.category}
+            </StyledTableCell>
+            <StyledTableCell style={{ maxWidth: "80px" }}>
+              {book.genre}
+            </StyledTableCell>
+            <StyledTableCell>{book.pages}</StyledTableCell>
+            <StyledTableCell>{book.price}</StyledTableCell>
+            <StyledTableCell>
               <img
                 src={book.image_url}
                 alt={book.image_url}
@@ -122,7 +133,7 @@ const GetAllBooks = () => {
                   wordWrap: "break-word",
                 }}
               />
-            </TableCell>
+            </StyledTableCell>
             <TableCell>
               <UpdateButton book={book} />
               <DeleteButton onClick={() => deleteBookHandler(book._id)} />

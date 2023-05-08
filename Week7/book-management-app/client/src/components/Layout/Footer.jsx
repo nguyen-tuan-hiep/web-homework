@@ -3,8 +3,8 @@ import { BottomNavigation, BottomNavigationAction } from "@mui/material";
 import GitHubIcon from "@mui/icons-material/GitHub";
 import FacebookIcon from "@mui/icons-material/Facebook";
 import InstagramIcon from "@mui/icons-material/Instagram";
-import EmailIcon from '@mui/icons-material/Email';
-import PinterestIcon from '@mui/icons-material/Pinterest';
+import EmailIcon from "@mui/icons-material/Email";
+import PinterestIcon from "@mui/icons-material/Pinterest";
 
 function Footer() {
   const [value, setValue] = React.useState(0);
@@ -19,7 +19,7 @@ function Footer() {
         display: "flex",
         justifyContent: "space-between",
         alignItems: "center",
-        backgroundColor: "#394867",
+        backgroundColor: "#4d5a76",
         height: "60px",
         padding: "0 20px",
       }}
@@ -28,7 +28,7 @@ function Footer() {
         <BottomNavigation
           value={value}
           onChange={handleChange}
-          style={{ backgroundColor: "#394867", height: "60px" }}
+          style={{ backgroundColor: "inherit", height: "60px" }}
         >
           <BottomNavigationAction
             icon={<GitHubIcon />}
@@ -74,7 +74,14 @@ function Footer() {
           fontSize: "16px",
         }}
       >
-        &copy; {new Date().getFullYear()} <a href="https://github.com/nguyen-tuan-hiep" style={{ color:"white"}}>Nguyen Tuan Hiep </a>. All rights reserved.
+        &copy; {new Date().getFullYear()}{" "}
+        <a
+          href="https://github.com/nguyen-tuan-hiep"
+          style={{ color: "white" }}
+        >
+          Nguyen Tuan Hiep{" "}
+        </a>
+        . All rights reserved.
       </div>
     </div>
   );
