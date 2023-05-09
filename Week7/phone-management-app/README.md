@@ -1,5 +1,5 @@
 ﻿# simple-CRUD--nodejs
-- For back-end (port 8080)
+- For back-end (port 3000)
   + Open terminal on folder "server"
   + Run "npm install"
   + Run "npm start"
