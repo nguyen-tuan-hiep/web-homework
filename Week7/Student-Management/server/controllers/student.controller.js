@@ -36,7 +36,11 @@ exports.createStudent = async (req, res) => {
     const normalizedLastName = lastName
       .normalize("NFD")
       .replace(/[\u0300-\u036f]/g, "");
-    const email = `${normalizedLastName}.${initials}${studentIdDigits}@sis.hust.edu.vn`.toLowerCase();
+    const initialsEng = initials
+      .replace(/[đĐ]/g, "D")
+      .replace(/[ăâắằẵẳấầẫẩậĂÂẮẰẴẲẤẦẪẨẬ]/g, "A")
+      .replace(/[êếềễểệÊẾỀỄỂỆ]/g, "E");
+    const email = `${normalizedLastName}.${initialsEng}${studentIdDigits}@sis.hust.edu.vn`.toLowerCase();
     const cohort = parseInt(StudentId.slice(0, 4)) - 1956 + 1;
     const adjustedTime = new Date(DateOfBirth);
     adjustedTime.setHours(adjustedTime.getDay() + 1);
@@ -105,7 +109,11 @@ exports.updateStudent = async (req, res) => {
     .normalize("NFD")
     .replace(/[\u0300-\u036f]/g, "");
 
-  const email = `${normalizedLastName}.${initials}${studentIdDigits}@sis.hust.edu.vn`.toLowerCase();
+  const initialsEng = initials
+    .replace(/[đĐ]/g, "D")
+    .replace(/[ăâắằẵẳấầẫẩậĂÂẮẰẴẲẤẦẪẨẬ]/g, "A")
+    .replace(/[êếềễểệÊẾỀỄỂỆ]/g, "E");
+  const email = `${normalizedLastName}.${initialsEng}${studentIdDigits}@sis.hust.edu.vn`.toLowerCase();
   const cohort = parseInt(StudentId.slice(0, 4)) - 1956 + 1;
   const adjustedTime = new Date(DateOfBirth);
   adjustedTime.setHours(adjustedTime.getDay() + 1);
