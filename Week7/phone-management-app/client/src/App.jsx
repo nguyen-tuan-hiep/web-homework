@@ -12,12 +12,18 @@ function App() {
     <>
       <BrowserRouter>
         <Header/>
-        <Routes>
-          <Route path="/" element={<AllPhones />} />
-          <Route path="/create" element={<CreatePhone />} />
-          <Route path="/update/:id" element={<UpdatePhone />}></Route>
-          <Route path="*" element={<NotFound />}></Route>
-        </Routes>
+        <div style={{
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center"
+        }}>
+          <Routes>
+            <Route path="/" element={<AllPhones />} />
+            <Route path="/create" element={<CreatePhone />} />
+            <Route path="/update/:id" element={<UpdatePhone />}></Route>
+            <Route path="*" element={<NotFound />}></Route>
+          </Routes>
+        </div>
         <Footer/>
       </BrowserRouter>
     </>
