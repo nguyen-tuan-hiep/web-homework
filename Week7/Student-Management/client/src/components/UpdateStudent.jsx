@@ -129,6 +129,11 @@ const UpdateStudent = () => {
           dateFormat="dd/MM/yyyy"
           placeholderText="Date of birth"
           className="datepicker"
+          selectsStart
+          showYearDropdown
+          scrollableYearDropdown
+          startDate={students.DateOfBirth}
+          endDate={students.DateOfBirth}
           value={formattedDate}
         />
       </FormControl>
