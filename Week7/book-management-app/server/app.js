@@ -1,33 +1,35 @@
 const express = require("express");
 const dotenv = require("dotenv");
 const cors = require("cors");
-const mongoose = require("mongoose");
+const {connect} = require("mongoose");
 
 const bookRouter = require("./routes/book.router");
-const { errorHandler } = require("./middlewares/errorHandler");
-const notFound = require("./notFound");
+const errorHandler = require("./middlewares/errorHandler");
+const notFound = require("./middlewares/notFound");
 
 dotenv.config();
 const app = express();
 
-const PORT = process.env.PORT || 8080;
+const PORT = process.env.PORT || 3000;
 
-mongoose
-  .connect(
+connect(
     process.env.MONGODB_URI ||
-      "mongodb+srv://hiepnt:hiepicthust@my-cluster.1aqvicz.mongodb.net/?retryWrites=true&w=majority",
+    "mongodb+srv://hiepnt:hiepicthust@my-cluster.1aqvicz.mongodb.net/?retryWrites=true&w=majority",
     {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
     }
-  )
-  .then(() => console.log("MongoDB connected"))
-  .catch((error) => console.log(error));
+)
+    .then(() => console.log("MongoDB connected"))
+    .catch((error) => console.log(error));
 
 app.use(cors());
+app.use(express.urlencoded({extended: true}));
 app.use(express.json());
 app.use("/books", bookRouter);
 app.use(errorHandler);
 app.use(notFound);
 
 app.listen(PORT, () => console.log(`Server is running at port ${PORT}`));
+
+module.exports = app;

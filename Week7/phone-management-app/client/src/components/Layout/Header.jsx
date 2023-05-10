@@ -1,6 +1,6 @@
 import React from "react";
-import { AppBar, Toolbar, styled } from "@mui/material";
-import { NavLink } from "react-router-dom";
+import {AppBar, Toolbar, styled} from "@mui/material";
+import {NavLink} from "react-router-dom";
 
 const Header = styled(AppBar)`
   background: #424242;
@@ -14,30 +14,31 @@ const Tabs = styled(NavLink)`
   color: inherit;
   text-decoration: none;
   font-weight: 600;
+
   &:hover {
     color: #171e2b;
   }
 `;
 
 const NavBar = () => {
-  return (
-    <div style={{
-        position: "fixed",
-        width: "100%",
-        marginBottom: "20px"
-    }}>
-      <Header
-        position="static"
-        sx={{
-          width: "100%",
-        }}
-      >
-        <Toolbar>
-          <Tabs to="/">Get all phones</Tabs>
-          <Tabs to="/create">Create new phone</Tabs>
-        </Toolbar>
-      </Header>
-    </div>
-  );
+    return (
+        <div style={{
+            position: "fixed",
+            width: "100%",
+            marginBottom: "20px"
+        }}>
+            <Header
+                position="static"
+                sx={{
+                    width: "100%",
+                }}
+            >
+                <Toolbar>
+                    <Tabs to="/">Get all phones</Tabs>
+                    <Tabs to="/create">Create new phone</Tabs>
+                </Toolbar>
+            </Header>
+        </div>
+    );
 };
 export default NavBar;

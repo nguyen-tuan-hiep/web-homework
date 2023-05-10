@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_URL = "http://localhost:8080/books";
+const API_URL = "http://localhost:3000/books";
 
 export const createBookController = async (data) => {
   try {
@@ -11,7 +11,7 @@ export const createBookController = async (data) => {
       alert(errorMessage);
     } else {
       console.error(error);
-      alert("An error occurred while saving the blog post");
+      alert("An error occurred while saving the book data");
     }
   }
 };
@@ -41,7 +41,7 @@ export const updateBookController = async (data, id) => {
       alert(errorMessage);
     } else {
       console.error(error);
-      alert("An error occurred while saving the blog post");
+      alert("An error occurred while saving the new book data");
     }
   }
 };
