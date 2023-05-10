@@ -1,6 +1,21 @@
 const StudentModel = require("../models/student.model");
 const { Types } = require("mongoose");
 
+function removeVietnameseSigns(inputString) {
+  // Conversion of accented Vietnamese characters
+  const ACCENTED_VIETNAMESE_CHARACTERS =
+    /[\u00C0\u00C1\u00C3\u00C8\u00C9\u00CC\u00CD\u00D2\u00D3\u00D5\u00D9\u00DA\u00DD\u00E0\u00E1\u00E3\u00E8\u00E9\u00EC\u00ED\u00F2\u00F3\u00F5\u00F9\u00FA\u00FD\u0102\u0103\u0110\u0111\u0128\u0129\u0168\u0169\u01A0\u01A1\u01AF\u01B0]/g;
+  const UNACCENTED_VIETNAMESE_CHARACTERS =
+    "AAAAEEEIIIOOOOUUUYaaaaeeeiiioooouuuyyAaDdIiUuOo";
+
+  // replace diacritical marks with their plain counterparts
+  return inputString.replace(ACCENTED_VIETNAMESE_CHARACTERS, function (match) {
+    return UNACCENTED_VIETNAMESE_CHARACTERS.charAt(
+      ACCENTED_VIETNAMESE_CHARACTERS.source.indexOf(match)
+    );
+  });
+}
+
 exports.getAllStudents = async (req, res) => {
   try {
     const students = await StudentModel.find({});
@@ -18,10 +33,12 @@ exports.createStudent = async (req, res) => {
     }
     if (
       StudentId.length !== 8 ||
-      isNaN(StudentId) ||
-      parseInt(StudentId.slice(0, 4)) < 1956
+      StudentId > 99999999 ||
+      StudentId < 19560000
     ) {
-      return res.status(400).json({ message: "Invalid Student ID" });
+      return res
+        .status(400)
+        .json({ message: "Student ID should be from 19560000 to 99999999" });
     }
     const existingStudent = await StudentModel.findOne({ StudentId });
     if (existingStudent) {
@@ -29,18 +46,16 @@ exports.createStudent = async (req, res) => {
     }
     const nameParts = Fullname.trim().split(" ");
     const lastName = nameParts.pop();
-    const initials = nameParts
-      .map((name) => name.charAt(0))
-      .join("")
+    const initials = nameParts.map((name) => name.charAt(0)).join("");
     const studentIdDigits = StudentId.slice(-6);
     const normalizedLastName = lastName
       .normalize("NFD")
       .replace(/[\u0300-\u036f]/g, "");
     const initialsEng = initials
-      .replace(/[đĐ]/g, "D")
-      .replace(/[ăâắằẵẳấầẫẩậĂÂẮẰẴẲẤẦẪẨẬ]/g, "A")
-      .replace(/[êếềễểệÊẾỀỄỂỆ]/g, "E");
-    const email = `${normalizedLastName}.${initialsEng}${studentIdDigits}@sis.hust.edu.vn`.toLowerCase();
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "");
+    const email =
+      `${normalizedLastName}.${initialsEng}${studentIdDigits}@sis.hust.edu.vn`.toLowerCase();
     const cohort = parseInt(StudentId.slice(0, 4)) - 1956 + 1;
     const adjustedTime = new Date(DateOfBirth);
     adjustedTime.setHours(adjustedTime.getDay() + 1);
@@ -83,12 +98,10 @@ exports.updateStudent = async (req, res) => {
   if (!Fullname) {
     return res.status(401).json({ message: "Fullname is required" });
   }
-  if (
-    StudentId.length !== 8 ||
-    isNaN(StudentId) ||
-    parseInt(StudentId.slice(0, 4)) < 1956
-  ) {
-    return res.status(401).json({ message: "Invalid Student ID" });
+  if (isNaN(StudentId) || StudentId > 99999999 || StudentId < 19560000) {
+    return res
+      .status(401)
+      .json({ message: "Student ID should be from 19560000 to 99999999" });
   }
 
   const existingStudent = await StudentModel.findOne({
@@ -109,11 +122,9 @@ exports.updateStudent = async (req, res) => {
     .normalize("NFD")
     .replace(/[\u0300-\u036f]/g, "");
 
-  const initialsEng = initials
-    .replace(/[đĐ]/g, "D")
-    .replace(/[ăâắằẵẳấầẫẩậĂÂẮẰẴẲẤẦẪẨẬ]/g, "A")
-    .replace(/[êếềễểệÊẾỀỄỂỆ]/g, "E");
-  const email = `${normalizedLastName}.${initialsEng}${studentIdDigits}@sis.hust.edu.vn`.toLowerCase();
+  const initialsEng = initials.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+  const email =
+    `${normalizedLastName}.${initialsEng}${studentIdDigits}@sis.hust.edu.vn`.toLowerCase();
   const cohort = parseInt(StudentId.slice(0, 4)) - 1956 + 1;
   const adjustedTime = new Date(DateOfBirth);
   adjustedTime.setHours(adjustedTime.getDay() + 1);
