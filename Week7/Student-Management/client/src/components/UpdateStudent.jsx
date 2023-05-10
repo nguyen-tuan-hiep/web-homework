@@ -8,9 +8,12 @@ import {
   styled,
 } from "@mui/material";
 import { useState, useEffect } from "react";
-import { getStudent, updateStudent } from "../service/api";
+import {
+  getStudentByIdController,
+  updateStudentController,
+} from "../service/api";
 import { useNavigate, useParams } from "react-router-dom";
-import SaveIcon from '@mui/icons-material/Save';
+import SaveIcon from "@mui/icons-material/Save";
 import CancelIcon from "@mui/icons-material/Cancel";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
@@ -19,7 +22,7 @@ import { format } from "date-fns";
 
 const Container = styled(FormGroup)`
   width: 50%;
-  margin: 5% auto 0 auto;
+  margin: 8% auto 20px auto;
   & > div {
     margin-top: 20px;
   }
@@ -32,11 +35,7 @@ const StyledButton = styled(Button)`
   margin-top: 20px;
   font-size: 16px;
   display: flex;
-  background-color: #394867;
-
-  &:hover {
-    background-color: #606c85;
-  }
+  background-color: #42a5f5;
 `;
 
 const CancelButton = styled(Button)`
@@ -47,27 +46,27 @@ const CancelButton = styled(Button)`
   font-size: 16px;
   display: flex;
   position: absolute;
-  border-color: #394867;
-  color: #394867;
-  &:hover {
-    background-color: #d8d8d8;
-    border-color: #394867;
-  }
 `;
 
-const initialFormState = { Fullname: "", StudentId: "", Email: "", Class: "", DateOfBirth: null };
+const initialFormState = {
+  Fullname: "",
+  StudentId: "",
+  Email: "",
+  Class: "",
+  DateOfBirth: null,
+};
 
-const EditStudent = () => {
+const UpdateStudent = () => {
   const [students, setStudents] = useState(initialFormState);
   const navigate = useNavigate();
   const { id } = useParams();
 
   useEffect(() => {
-    getStudentData();
+    getStudentByIdHandler();
   }, []);
 
-  const getStudentData = async () => {
-    const response = await getStudent(id);
+  const getStudentByIdHandler = async () => {
+    const response = await getStudentByIdController(id);
     setStudents(response.data);
   };
 
@@ -75,9 +74,9 @@ const EditStudent = () => {
     setStudents({ ...students, [e.target.name]: e.target.value });
   };
 
-  const addStudentDetails = async () => {
-    await updateStudent(students, id);
-    navigate("/");
+  const updateStudentHandler = async () => {
+    // await updateStudentController(students, id);
+    navigate(await updateStudentController(students, id) ? "/" : `/update/${id}`);
   };
 
   const onDateChange = (date) => {
@@ -85,15 +84,15 @@ const EditStudent = () => {
   };
 
   const formattedDate = students.DateOfBirth
-  ? format(new Date(students.DateOfBirth), "dd-MM-yyyy")
-  : "";
+    ? format(new Date(students.DateOfBirth), "dd-MM-yyyy")
+    : "";
 
   return (
     <Container>
       <Typography
         variant="h4"
         color="initial"
-        style={{ textAlign: "center", fontWeight: "bold", color: "#394867" }}
+        style={{ textAlign: "center", fontWeight: "bold", color: "#42a5f5" }}
       >
         Update students
       </Typography>
@@ -123,7 +122,9 @@ const EditStudent = () => {
       </FormControl>
       <FormControl>
         <DatePicker
-          selected={students.DateOfBirth ? new Date(students.DateOfBirth) : null}
+          selected={
+            students.DateOfBirth ? new Date(students.DateOfBirth) : null
+          }
           onChange={onDateChange}
           dateFormat="dd/MM/yyyy"
           placeholderText="Date of birth"
@@ -140,7 +141,11 @@ const EditStudent = () => {
           >
             Cancel
           </CancelButton>
-          <StyledButton onClick={() => addStudentDetails()} variant="contained" startIcon={<SaveIcon />}>
+          <StyledButton
+            onClick={() => updateStudentHandler()}
+            variant="contained"
+            startIcon={<SaveIcon />}
+          >
             Save changes
           </StyledButton>
         </span>
@@ -149,4 +154,4 @@ const EditStudent = () => {
   );
 };
 
-export default EditStudent;
+export default UpdateStudent;

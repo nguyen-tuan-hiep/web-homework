@@ -1,15 +1,12 @@
-import React from "react";
-import { AppBar, Toolbar, styled } from "@mui/material";
-import { NavLink } from "react-router-dom";
+import { Toolbar, styled, AppBar } from "@mui/material";
+import {NavLink} from "react-router-dom";
+// import {Header, Tabs} from "../muiStyled.js";
+import { useEffect, React } from "react";
 
 const Header = styled(AppBar)`
-  position: fixed;
-  top: 0;
-  left: 0;
-  background: green;
-  margin-top: 0px;
+  background: #42a5f5;
+  margin-top: 0;
 `;
-
 
 const Tabs = styled(NavLink)`
   font-size: 22px;
@@ -18,21 +15,49 @@ const Tabs = styled(NavLink)`
   color: inherit;
   text-decoration: none;
   font-weight: 600;
+
   &:hover {
-    color: #273248;
+    color: #171e2b;
   }
 `;
 
 const NavBar = () => {
-  return (
-    <>
-      <Header position="static">
-        <Toolbar>
-          <Tabs to="/">Get all students</Tabs>
-          <Tabs to="/add">Create new student</Tabs>
-        </Toolbar>
-      </Header>
-    </>
-  );
+    useEffect(() => {
+        const header = document.getElementById('header');
+        let lastScrollPosition = 0;
+
+        const scrollHandler = () => {
+            const currentScrollPosition = window.scrollY;
+            const scrollDirection = currentScrollPosition > lastScrollPosition ? "down" : "up";
+            header.style.transform = `translateY(${scrollDirection === "down" ? "-100%" : "0%"})`;
+            lastScrollPosition = currentScrollPosition;
+        };
+
+        window.addEventListener('scroll', scrollHandler);
+
+        return () => window.removeEventListener('scroll', scrollHandler);
+    }, []);
+
+    return (
+        <div id={'header'} style={{
+            position: "fixed",
+            width: "100%",
+            marginBottom: "20px",
+            transition: "transform 0.2s ease-in-out"
+        }}>
+            <Header
+                position="static"
+                sx={{
+                    width: "100%",
+
+                }}
+            >
+                <Toolbar>
+                    <Tabs to="/">Get all students</Tabs>
+                    <Tabs to="/create">Create new student</Tabs>
+                </Toolbar>
+            </Header>
+        </div>
+    );
 };
 export default NavBar;

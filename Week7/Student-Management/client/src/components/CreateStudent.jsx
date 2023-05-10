@@ -8,7 +8,7 @@ import {
   styled,
 } from "@mui/material";
 import { useState } from "react";
-import { addStudent } from "../service/api";
+import { createStudentController } from "../service/api";
 import { useNavigate } from "react-router-dom";
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 import CancelIcon from "@mui/icons-material/Cancel";
@@ -31,11 +31,7 @@ const StyledButton = styled(Button)`
   margin-top: 20px;
   font-size: 16px;
   display: flex;
-  background-color: #394867;
-
-  &:hover {
-    background-color: #606c85;
-  }
+  background-color: #42a5f5;
 `;
 
 const CancelButton = styled(Button)`
@@ -46,17 +42,17 @@ const CancelButton = styled(Button)`
   font-size: 16px;
   display: flex;
   position: absolute;
-  border-color: #394867;
-  color: #394867;
-  &:hover {
-    background-color: #d8d8d8;
-    border-color: #394867;
-  }
 `;
 
-const initialFormState = { Fullname: "", StudentId: "", Email: "", Class: "", DateOfBirth: null };
+const initialFormState = {
+  Fullname: "",
+  StudentId: "",
+  Email: "",
+  Class: "",
+  DateOfBirth: null,
+};
 
-const AddStudent = () => {
+const CreateStudent = () => {
   const [students, setStudents] = useState(initialFormState);
   const navigate = useNavigate();
 
@@ -64,23 +60,28 @@ const AddStudent = () => {
     setStudents({ ...students, [e.target.name]: e.target.value });
   };
 
-  const addStudentDetails = async () => {
-    await addStudent(students);
-    navigate("/");
+  const createStudentHandler = async () => {
+    // await createStudentController(students);
+    // navigate("/");
+    navigate((await createStudentController(students)) ? "/" : "/create");
   };
 
   const onDateChange = (date) => {
-    const selectedDate = new Date(date.getFullYear(), date.getMonth(), date.getDate());
+    const selectedDate = new Date(
+      date.getFullYear(),
+      date.getMonth(),
+      date.getDate()
+    );
     setStudents({ ...students, DateOfBirth: selectedDate });
   };
 
   return (
     <Container>
       <Typography
-        marginTop = "50px"
+        marginTop="50px"
         variant="h4"
         color="initial"
-        style={{ textAlign: "center", fontWeight: "bold", color: "#394867" }}
+        style={{ textAlign: "center", fontWeight: "bold", color: "#42a5f5" }}
       >
         Create new students
       </Typography>
@@ -114,7 +115,7 @@ const AddStudent = () => {
           Cancel
         </CancelButton>
         <StyledButton
-          onClick={() => addStudentDetails()}
+          onClick={() => createStudentHandler()}
           variant="contained"
           startIcon={<AddCircleOutlineIcon />}
         >
@@ -125,4 +126,4 @@ const AddStudent = () => {
   );
 };
 
-export default AddStudent;
+export default CreateStudent;

@@ -2,14 +2,24 @@ import axios from "axios";
 
 const API_URL = "http://localhost:8080/api/students";
 
-export const addStudent = async (data) => {
+export const createStudentController = async (data) => {
   try {
     return await axios.post(API_URL, data);
   } catch (error) {
-    console.log(error.message);
+    if (
+      error.response.status &&
+      error.response.data &&
+      error.response.data.message
+    ) {
+      const errorMessage = error.response.data.message;
+      alert(errorMessage);
+    } else {
+      console.error(error);
+      alert("An error occurred while adding student");
+    }
   }
 };
-export const getAllStudents = async () => {
+export const getAllStudentsController = async () => {
   try {
     return await axios.get(API_URL);
   } catch (error) {
@@ -17,7 +27,7 @@ export const getAllStudents = async () => {
   }
 };
 
-export const getStudent = async (data) => {
+export const getStudentByIdController = async (data) => {
   try {
     return await axios.get(`${API_URL}/${data}`);
   } catch (error) {
@@ -25,15 +35,21 @@ export const getStudent = async (data) => {
   }
 };
 
-export const updateStudent = async (data, id) => {
+export const updateStudentController = async (data, id) => {
   try {
     return await axios.patch(`${API_URL}/${id}`, data);
   } catch (error) {
-    console.log(error.message);
+    if (error.response && error.response.data && error.response.data.message) {
+      const errorMessage = error.response.data.message;
+      alert(errorMessage);
+    } else {
+      console.error(error);
+      alert("An error occurred while updating the student details");
+    }
   }
 };
 
-export const deleteStudent = async (id) => {
+export const deleteStudentController = async (id) => {
   try {
     return await axios.delete(`${API_URL}/${id}`);
   } catch (error) {
