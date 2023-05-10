@@ -1,5 +1,8 @@
 import {useState, useEffect} from "react";
-import {getPhoneByIdController, updatePhoneController} from "../../controller/phone.controller.js";
+import {
+    getPhoneByIdController,
+    updatePhoneController
+} from "../../controller/phone.controller.js";
 import {useNavigate, useParams} from "react-router-dom";
 import {SaveChangesButton} from "../Button/Button.jsx";
 import Form from "./Form.jsx";
@@ -25,9 +28,9 @@ const UpdatePhone = () => {
         setPhone(response.data);
     };
 
+
     const updatePhoneHandler = async () => {
-        await updatePhoneController(phone, id);
-        navigate("/");
+        navigate(await updatePhoneController(phone, id) ? "/" : `/update/${id}`);
     };
 
     return (

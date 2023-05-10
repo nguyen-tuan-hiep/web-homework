@@ -1,25 +1,14 @@
 import {
     TableHead,
     TableBody,
-    TableRow,
     TableCell,
-    styled,
 } from "@mui/material";
 import {useEffect, useState} from "react";
 import {getAllPhonesController, deletePhoneController} from "../../controller/phone.controller.js";
 import {UpdateButton, DeleteButton} from "../Button/Button.jsx";
-import {StyledTable, StyledTableBody} from "../muiStyled.js";
+import {StyledTable, StyledTableBody, StyledTableHead} from "../muiStyled.js";
 
-const StyledTableHead = styled(TableRow)`
-  background: #424242;
 
-  & > th {
-    color: #fff;
-    font-size: 18px;
-    text-align: center;
-    font-weight: 600;
-  }
-`;
 
 const GetAllPhones = () => {
     const [phones, setPhones] = useState([]);
@@ -36,6 +25,7 @@ const GetAllPhones = () => {
     const deletePhoneHandler = async (id) => {
         await deletePhoneController(id);
         await getAllPhonesHandler();
+        alert("Delete Successfully");
     };
 
     return (

@@ -14,7 +14,7 @@ import CreateButton from "../Button/CreateButton";
 
 const Container = styled(FormGroup)`
   width: 50%;
-  margin: 3% auto 5% auto;
+  margin: 7.5% auto 10% auto;
   & > div {
     margin-top: 20px;
   }
@@ -43,8 +43,7 @@ const CreateBook = () => {
   };
 
   const createBookHandler = async () => {
-    await createBookController(book);
-    navigate("/");
+    navigate(await createBookController(book) ? "/" : "/create");
   };
 
   return (

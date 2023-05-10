@@ -16,17 +16,19 @@ const CreatePhone = () => {
     const navigate = useNavigate();
 
     const createPhoneHandler = async () => {
-        await createPhoneController(phone);
-        navigate("/");
+        navigate(await createPhoneController(phone) ? "/" : "/create");
     };
 
     return (
+        <>
         <Container>
-            <StyledTypography>
-                Create new phone
-            </StyledTypography>
-            <Form prop={phone} setProp={setPhone} func={createPhoneHandler} Btn={CreateButton}/>
+        <StyledTypography>
+            Create new phone
+        </StyledTypography>
+        <Form prop={phone} setProp={setPhone} func={createPhoneHandler} Btn={CreateButton}/>
         </Container>
+        </>
+
     );
 };
 

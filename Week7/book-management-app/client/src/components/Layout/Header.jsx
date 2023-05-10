@@ -4,7 +4,7 @@ import { NavLink } from "react-router-dom";
 
 const Header = styled(AppBar)`
   background: #4d5a76;
-  margin-top: 0px;
+  margin-top: 0;
 `;
 
 const Tabs = styled(NavLink)`
@@ -23,7 +23,7 @@ const NavBar = () => {
   return (
     <>
       <Header
-        position="static"
+        position="fixed"
         sx={{
           width: "100%",
         }}

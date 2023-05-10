@@ -21,7 +21,11 @@ const Tabs = styled(NavLink)`
 
 const NavBar = () => {
   return (
-    <>
+    <div style={{
+        position: "fixed",
+        width: "100%",
+        marginBottom: "20px"
+    }}>
       <Header
         position="static"
         sx={{
@@ -33,7 +37,7 @@ const NavBar = () => {
           <Tabs to="/create">Create new phone</Tabs>
         </Toolbar>
       </Header>
-    </>
+    </div>
   );
 };
 export default NavBar;

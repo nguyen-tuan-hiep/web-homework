@@ -13,6 +13,7 @@ export const createPhoneController = async (data) => {
             console.error(error);
             alert("An error occurred while saving the new phone data");
         }
+        return false;
     }
 };
 
@@ -43,6 +44,7 @@ export const updatePhoneController = async (data, id) => {
             console.error(error);
             alert("An error occurred while saving the new phone data");
         }
+        return false;
     }
 };
 

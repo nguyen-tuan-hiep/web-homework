@@ -6,8 +6,7 @@ import {
 
 export const Container = styled(FormGroup)`
   width: 50%;
-  margin: 3% auto 5% auto;
-
+  margin: 7.5% auto 10% auto;
   & > div {
     margin-top: 25px;
   }
@@ -22,9 +21,20 @@ export const StyledTypography = styled(Typography)`
 
 export const StyledTable = styled(Table)`
   width: 90%;
-  margin: 50px auto 50px auto;
+  margin: 100px auto 100px auto;
   box-shadow: rgba(0, 0, 0, 0.35) 0 5px 15px;
   border-radius: 15px;
+`;
+
+export const StyledTableHead = styled(TableRow)`
+  background: #424242;
+
+  & > th {
+    color: #fff;
+    font-size: 18px;
+    text-align: center;
+    font-weight: 600;
+  }
 `;
 
 export const StyledTableBody = styled(TableRow)`

@@ -13,8 +13,8 @@ import UpdateButton from "../Button/UpdateButton";
 
 const StyledTable = styled(Table)`
   width: 90%;
-  margin: 50px auto 50px auto;
-  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  margin: 100px auto 100px auto;
+  box-shadow: rgba(0, 0, 0, 0.35) 0 5px 15px;
   border-radius: 15px;
 `;
 const StyledTableBody = styled(TableRow)`
@@ -25,7 +25,7 @@ const StyledTableBody = styled(TableRow)`
     background-color: ${({ theme }) => theme.palette.action.hover};
   }
   &:nth-of-type(even) {
-    background-color: "grey";
+    background-color: white;
   }
 `;
 

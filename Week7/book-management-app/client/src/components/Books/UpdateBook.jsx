@@ -14,7 +14,7 @@ import SaveChangesButton from "../Button/SaveChangesButton";
 
 const Container = styled(FormGroup)`
   width: 50%;
-  margin: 3% auto 5% auto;
+  margin: 7.5% auto 10% auto;
   & > div {
     margin-top: 25px;
   }
@@ -52,8 +52,7 @@ const UpdateBook = () => {
   };
 
   const updateBookHandler = async () => {
-    await updateBookController(book, id);
-    navigate("/");
+    navigate(await updateBookController(book, id) ? "/" : "/update");
   };
 
   return (
