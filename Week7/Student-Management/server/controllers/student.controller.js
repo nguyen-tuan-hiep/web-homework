@@ -10,11 +10,17 @@ exports.getAllStudents = async (req, res) => {
   }
 };
 
-
 exports.createStudent = async (req, res) => {
   try {
     const { Fullname, StudentId, DateOfBirth } = req.body;
-    if (StudentId.length !== 8 || isNaN(StudentId) || parseInt(StudentId.slice(0, 4)) < 1956) {
+    if (!Fullname) {
+      return res.status(400).json({ message: "Fullname is required" });
+    }
+    if (
+      StudentId.length !== 8 ||
+      isNaN(StudentId) ||
+      parseInt(StudentId.slice(0, 4)) < 1956
+    ) {
       return res.status(400).json({ message: "Invalid Student ID" });
     }
     const existingStudent = await StudentModel.findOne({ StudentId });
@@ -24,13 +30,15 @@ exports.createStudent = async (req, res) => {
     const nameParts = Fullname.trim().split(" ");
     const lastName = nameParts.pop();
     const initials = nameParts
-      .map((name) => name.charAt(0).toUpperCase())
-      .join("");
+      .map((name) => name.charAt(0))
+      .join("")
     const studentIdDigits = StudentId.slice(-6);
-    const normalizedLastName = lastName.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
-    const email = `${normalizedLastName}.${initials}${studentIdDigits}@sis.hust.edu.vn`;
+    const normalizedLastName = lastName
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "");
+    const email = `${normalizedLastName}.${initials}${studentIdDigits}@sis.hust.edu.vn`.toLowerCase();
     const cohort = parseInt(StudentId.slice(0, 4)) - 1956 + 1;
-    const adjustedTime = new Date(DateOfBirth); 
+    const adjustedTime = new Date(DateOfBirth);
     adjustedTime.setHours(adjustedTime.getDay() + 1);
 
     const newStudent = new StudentModel({
@@ -68,7 +76,14 @@ exports.updateStudent = async (req, res) => {
     return;
   }
   const { Fullname, StudentId, DateOfBirth } = req.body;
-  if (StudentId.length !== 8 || isNaN(StudentId) || parseInt(StudentId.slice(0, 4)) < 1956) {
+  if (!Fullname) {
+    return res.status(401).json({ message: "Fullname is required" });
+  }
+  if (
+    StudentId.length !== 8 ||
+    isNaN(StudentId) ||
+    parseInt(StudentId.slice(0, 4)) < 1956
+  ) {
     return res.status(401).json({ message: "Invalid Student ID" });
   }
 
@@ -86,20 +101,27 @@ exports.updateStudent = async (req, res) => {
     .map((name) => name.charAt(0).toUpperCase())
     .join("");
   const studentIdDigits = StudentId.slice(-6);
-  const normalizedLastName = lastName.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+  const normalizedLastName = lastName
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "");
 
-  const email = `${normalizedLastName}.${initials}${studentIdDigits}@sis.hust.edu.vn`;
+  const email = `${normalizedLastName}.${initials}${studentIdDigits}@sis.hust.edu.vn`.toLowerCase();
   const cohort = parseInt(StudentId.slice(0, 4)) - 1956 + 1;
-  const adjustedTime = new Date(DateOfBirth); 
+  const adjustedTime = new Date(DateOfBirth);
   adjustedTime.setHours(adjustedTime.getDay() + 1);
 
-  const student = await StudentModel.findByIdAndUpdate(student_id, {
-    ...req.body,
-    Email: email,
-    Cohort: cohort,
-    DateOfBirth: adjustedTime,}, {
-    new: true,
-  });
+  const student = await StudentModel.findByIdAndUpdate(
+    student_id,
+    {
+      ...req.body,
+      Email: email,
+      Cohort: cohort,
+      DateOfBirth: adjustedTime,
+    },
+    {
+      new: true,
+    }
+  );
 
   if (!student) {
     res.json({ message: "Not found student" });
