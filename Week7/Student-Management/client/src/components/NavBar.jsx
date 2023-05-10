@@ -1,7 +1,7 @@
 import { Toolbar, styled, AppBar } from "@mui/material";
 import {NavLink} from "react-router-dom";
 // import {Header, Tabs} from "../muiStyled.js";
-import { useEffect, React } from "react";
+import { useEffect, React, useRef } from "react";
 
 const Header = styled(AppBar)`
   background: #42a5f5;
@@ -22,14 +22,14 @@ const Tabs = styled(NavLink)`
 `;
 
 const NavBar = () => {
+    const header = useRef();
     useEffect(() => {
-        const header = document.getElementById('header');
         let lastScrollPosition = 0;
 
         const scrollHandler = () => {
             const currentScrollPosition = window.scrollY;
             const scrollDirection = currentScrollPosition > lastScrollPosition ? "down" : "up";
-            header.style.transform = `translateY(${scrollDirection === "down" ? "-100%" : "0%"})`;
+            header.current.style.transform = `translateY(${scrollDirection === "down" ? "-100%" : "0%"})`;
             lastScrollPosition = currentScrollPosition;
         };
 
@@ -39,7 +39,7 @@ const NavBar = () => {
     }, []);
 
     return (
-        <div id={'header'} style={{
+        <div ref={header} id={'header'} style={{
             position: "fixed",
             width: "100%",
             marginBottom: "20px",
