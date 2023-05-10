@@ -20,9 +20,11 @@ const GetAllBooks = () => {
     };
 
     const deleteBookHandler = async (id) => {
-        await deleteBookController(id);
-        await getAllBooksHandler().then(() => {
-        });
+        if (confirm(`Are you sure you want to delete`)) {
+            await deleteBookController(id);
+        }
+        else return;
+        await getAllBooksHandler().then(() => {});
     };
 
     return (
