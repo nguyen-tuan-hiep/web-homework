@@ -13,7 +13,6 @@ function Footer() {
     useEffect(() => {
         let lastScrollPosition = 0;
         footer.current.style.transform = 'translateY(0%)';
-        console.log("Test")
         const scrollHandler = () => {
             const currentScrollPosition = window.scrollY;
             const scrollDirection =

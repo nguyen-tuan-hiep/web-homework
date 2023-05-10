@@ -39,7 +39,7 @@ const NavBar = () => {
     }, []);
 
     return (
-        <div ref={header} id={'header'} style={{
+        <div ref={header} style={{
             position: "fixed",
             width: "100%",
             marginBottom: "20px",

@@ -1,4 +1,5 @@
-import React, {useEffect} from "react";
+import React, {useEffect, useRef} from "react";
+import {useLocation} from "react-router-dom";
 import {BottomNavigation, BottomNavigationAction} from "@mui/material";
 import GitHubIcon from "@mui/icons-material/GitHub";
 import FacebookIcon from "@mui/icons-material/Facebook";
@@ -7,24 +8,25 @@ import EmailIcon from "@mui/icons-material/Email";
 import PinterestIcon from "@mui/icons-material/Pinterest";
 
 function Footer() {
+    let location = useLocation();
+    const footer = useRef();
     useEffect(() => {
-        const footer = document.getElementById('footer');
         let lastScrollPosition = 0;
-
+        footer.current.style.transform = 'translateY(0%)';
         const scrollHandler = () => {
             const currentScrollPosition = window.scrollY;
-            const scrollDirection = currentScrollPosition > lastScrollPosition ? "down" : "up";
-            footer.style.transform = `translateY(${scrollDirection === "down" ? "0%" : "100%"})`;
+            const scrollDirection = currentScrollPosition >= lastScrollPosition ? "down" : "up";
+            footer.current.style.transform = `translateY(${scrollDirection === "down" ? "0%" : "100%"})`;
             lastScrollPosition = currentScrollPosition;
         };
 
         window.addEventListener('scroll', scrollHandler);
 
         return () => window.removeEventListener('scroll', scrollHandler);
-    }, []);
+    }, [location]);
 
     return (
-        <div id={'footer'} style={{
+        <div ref={footer} style={{
             position: "fixed",
             width: "100%",
             left: 0,

@@ -27,8 +27,9 @@ function App() {
                         <Route path="*" element={<NotFound/>}></Route>
                     </Routes>
                 </div>
+                <Footer/>
             </BrowserRouter>
-            <Footer/>
+
         </>
     );
 }
