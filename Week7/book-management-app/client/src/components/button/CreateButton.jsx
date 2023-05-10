@@ -14,7 +14,7 @@ const StyledButton = styled(Button)`
   }
 `;
 
-const CreateButton = ({ onClick }) => {
+const CreateButton = ({ onClick }) => { // detructure onClick from props
   return (
     <StyledButton
       onClick={onClick}
