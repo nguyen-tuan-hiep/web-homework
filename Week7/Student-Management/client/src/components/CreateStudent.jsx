@@ -83,14 +83,14 @@ const CreateStudent = () => {
         color="initial"
         style={{ textAlign: "center", fontWeight: "bold", color: "#42a5f5" }}
       >
-        Create new students
+        Create new student
       </Typography>
       <FormControl>
-        <InputLabel>Fullname</InputLabel>
+        <InputLabel>Fullname*</InputLabel>
         <Input onChange={(e) => onValueChange(e)} name="Fullname" />
       </FormControl>
       <FormControl>
-        <InputLabel>Student Id</InputLabel>
+        <InputLabel>Student ID*</InputLabel>
         <Input onChange={(e) => onValueChange(e)} name="StudentId" />
       </FormControl>
       <FormControl>
