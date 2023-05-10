@@ -1,12 +1,13 @@
 import {
-  FormGroup,
-  Typography,
-  styled, Table, TableRow, Button,
+    FormGroup,
+    Typography,
+    styled, Table, TableRow, Button,
 } from "@mui/material";
 
 export const Container = styled(FormGroup)`
   width: 50%;
   margin: 3% auto 5% auto;
+
   & > div {
     margin-top: 25px;
   }
@@ -30,9 +31,11 @@ export const StyledTableBody = styled(TableRow)`
   & > td {
     font-size: 16px;
   }
+
   &:nth-of-type(odd) {
-    background-color: ${({ theme }) => theme.palette.action.hover};
+    background-color: ${({theme}) => theme.palette.action.hover};
   }
+
   &:nth-of-type(even) {
     background-color: white;
   }
@@ -63,6 +66,7 @@ export const StyledCreateButton = styled(Button)`
   font-size: 16px;
   display: flex;
   background-color: #4d5a76;
+
   &:hover {
     background-color: #606c85;
   }

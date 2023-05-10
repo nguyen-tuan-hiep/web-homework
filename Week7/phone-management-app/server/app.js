@@ -15,25 +15,25 @@ const PORT = process.env.PORT || 3000;
 // Connect to MongoDB database
 connect(
     process.env.MONGODB_URI ||
-      "mongodb+srv://hoangk2hust:TP5OkwB7fIoT4Ubj@cluster0.w2dcpdj.mongodb.net/phone",
+    "mongodb+srv://hoangk2hust:TP5OkwB7fIoT4Ubj@cluster0.w2dcpdj.mongodb.net/phone",
     {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
     }
-  )
-  .then(() => console.log("MongoDB connected"))
-  .catch((error) => console.log(error));
+)
+    .then(() => console.log("MongoDB connected"))
+    .catch((error) => console.log(error));
 
 // Allow requests from any origin
 app.use(cors());
-app.use(express.urlencoded({ extended: true }));
+app.use(express.urlencoded({extended: true}));
 app.use(express.json());
 app.use("/phones", phoneRouter);
 app.use(errorHandler);
 app.use(notFound);
 
 app.listen(PORT, () => {
-  console.log(`App listening on http://localhost:${PORT}`);
+    console.log(`App listening on http://localhost:${PORT}`);
 });
 
 module.exports = app;
