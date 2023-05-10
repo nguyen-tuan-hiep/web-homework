@@ -97,7 +97,7 @@ const UpdateStudent = () => {
         Update students
       </Typography>
       <FormControl>
-        <InputLabel>Fullname</InputLabel>
+        <InputLabel>Fullname*</InputLabel>
         <Input
           onChange={(e) => onValueChange(e)}
           name="Fullname"
@@ -105,7 +105,7 @@ const UpdateStudent = () => {
         />
       </FormControl>
       <FormControl>
-        <InputLabel>Student Id</InputLabel>
+        <InputLabel>Student ID*</InputLabel>
         <Input
           onChange={(e) => onValueChange(e)}
           name="StudentId"
@@ -129,6 +129,11 @@ const UpdateStudent = () => {
           dateFormat="dd/MM/yyyy"
           placeholderText="Date of birth"
           className="datepicker"
+          selectsStart
+          showYearDropdown
+          scrollableYearDropdown
+          startDate={students.DateOfBirth}
+          endDate={students.DateOfBirth}
           value={formattedDate}
         />
       </FormControl>
