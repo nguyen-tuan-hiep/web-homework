@@ -52,7 +52,7 @@ const UpdateBook = () => {
   };
 
   const updateBookHandler = async () => {
-    navigate(await updateBookController(book, id) ? "/" : "/update");
+    navigate((await updateBookController(book, id)) ? "/" : `/update/${id}`);
   };
 
   return (
