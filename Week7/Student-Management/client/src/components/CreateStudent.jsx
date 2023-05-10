@@ -1,0 +1,128 @@
+import {
+  FormGroup,
+  FormControl,
+  InputLabel,
+  Input,
+  Button,
+  Typography,
+  styled,
+} from "@mui/material";
+import { useState } from "react";
+import { addStudent } from "../service/api";
+import { useNavigate } from "react-router-dom";
+import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
+import CancelIcon from "@mui/icons-material/Cancel";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+import "../DatePicker.css";
+
+const Container = styled(FormGroup)`
+  width: 50%;
+  margin: 5% auto 0 auto;
+  & > div {
+    margin-top: 20px;
+  }
+`;
+
+const StyledButton = styled(Button)`
+  width: 35%;
+  margin-left: 65%;
+  height: 50px;
+  margin-top: 20px;
+  font-size: 16px;
+  display: flex;
+  background-color: #394867;
+
+  &:hover {
+    background-color: #606c85;
+  }
+`;
+
+const CancelButton = styled(Button)`
+  width: 35%;
+  height: 50px;
+  margin-left: 0%;
+  margin-top: 20px;
+  font-size: 16px;
+  display: flex;
+  position: absolute;
+  border-color: #394867;
+  color: #394867;
+  &:hover {
+    background-color: #d8d8d8;
+    border-color: #394867;
+  }
+`;
+
+const initialFormState = { Fullname: "", StudentId: "", Email: "", Class: "", DateOfBirth: null };
+
+const AddStudent = () => {
+  const [students, setStudents] = useState(initialFormState);
+  const navigate = useNavigate();
+
+  const onValueChange = (e) => {
+    setStudents({ ...students, [e.target.name]: e.target.value });
+  };
+
+  const addStudentDetails = async () => {
+    await addStudent(students);
+    navigate("/");
+  };
+
+  const onDateChange = (date) => {
+    const selectedDate = new Date(date.getFullYear(), date.getMonth(), date.getDate());
+    setStudents({ ...students, DateOfBirth: selectedDate });
+  };
+
+  return (
+    <Container>
+      <Typography
+        marginTop = "50px"
+        variant="h4"
+        color="initial"
+        style={{ textAlign: "center", fontWeight: "bold", color: "#394867" }}
+      >
+        Create new students
+      </Typography>
+      <FormControl>
+        <InputLabel>Fullname</InputLabel>
+        <Input onChange={(e) => onValueChange(e)} name="Fullname" />
+      </FormControl>
+      <FormControl>
+        <InputLabel>Student Id</InputLabel>
+        <Input onChange={(e) => onValueChange(e)} name="StudentId" />
+      </FormControl>
+      <FormControl>
+        <InputLabel>Class</InputLabel>
+        <Input onChange={(e) => onValueChange(e)} name="Class" />
+      </FormControl>
+      <FormControl>
+        <DatePicker
+          selected={students.DateOfBirth}
+          onChange={onDateChange}
+          dateFormat="dd/MM/yyyy"
+          placeholderText="Date of birth"
+          className="datepicker"
+        />
+      </FormControl>
+      <FormControl>
+        <CancelButton
+          onClick={() => navigate("/")}
+          variant="outlined"
+          startIcon={<CancelIcon />}
+        >
+          Cancel
+        </CancelButton>
+        <StyledButton
+          onClick={() => addStudentDetails()}
+          variant="contained"
+          startIcon={<AddCircleOutlineIcon />}
+        >
+          Create
+        </StyledButton>
+      </FormControl>
+    </Container>
+  );
+};
+
+export default AddStudent;
