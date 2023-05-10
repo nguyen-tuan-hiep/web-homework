@@ -6,10 +6,13 @@ import {BrowserRouter, Routes, Route} from "react-router-dom";
 import UpdateBook from "./components/Books/UpdateBook";
 import Footer from "./components/Layout/Footer";
 import NotFound from "./components/ErrorPage/NotFound";
-
+import Favicon from "react-favicon";
 function App() {
     return (
         <>
+            <div className="App">
+                <Favicon url="./src/favicon.png"></Favicon>
+            </div>
             <BrowserRouter>
                 <Header/>
                 <div style={{
