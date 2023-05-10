@@ -12,73 +12,52 @@
 </head>
 
 <body class="mx-40 my-20">
-
     <div class="grid grid-cols-3 gap-5">
-
-        <!-- Left div -->
         <div class="...">
-
-            <!-- Top left div -->
             <div id="basic-info">
-
-                <!-- Image -->
                 <div id="img">
                     <div class="img-hover-zoom">
                         <img id="hust-png" src="./images/hust.png" alt="hust-img">
                     </div>
 
                     <div>
-                        <img id="me" src="./images/me.png" alt="personal-img">
+                        <img id="student-img" src="./images/me.png" alt="personal-img">
                     </div>
                 </div>
-
-                <!-- Name, class, email -->
                 <div id="name-class-email">
                     <div>MS: 20205151</div>
                     <div>Họ tên: Nguyễn Tuấn Hiệp</div>
                     <div>Lớp: ICT 01-K65</div>
                     <div>Email: hiep.nt205151@sis.hust.edu.vn</div>
-                    <div>Email cá nhân: hiep454546@gmail.com</div>
+                    <div>Email cá nhân: hiep@gmail.com</div>
                 </div>
             </div>
-
-            <!-- Bottom left div -->
             <div id="status">
-
-                <!-- Trang thai, quan ly button -->
                 <div class="btn-group">
                     <span>
-                        <!--group these buttons as radio button group-->
                         <button onclick="ShowScoreStatus()" id="trang-thai" class="btn"
                             style="width: 35%; border-radius: 8px 0 0 0; border-bottom: none;">Trạng
                             thái</button>
-                        <button onclick="HideScoreStatus()" id="tem" class="btn"
+                        <button onclick="HideScoreStatus()" id="quan-ly" class="btn"
                             style="width: 30%; border-radius: 0 8px 0 0;">Quản lý</button>
-
-
                     </span>
                     <span>
                         <button
                             style="width: 35%; color: white; border-right: none; border-left: none; border-top: none; cursor: default;">-</button>
                     </span>
                 </div>
-
-                <!-- Grade, Credits -->
                 <div id="grade">
                     <div>Trạng thái học tập: <span id="study-status"><strong>Học</strong></span></div>
                     <div>CPA: 3.6</div>
                     <div>Nợ: 0 TC</div>
-                    <div>Tích lũy: 63 TC</div>
+                    <div>Tích lũy: 65 TC</div>
                     <div>Mức cảnh báo: M0</div>
-                    <div>Trình độ: 2</div>
+                    <div>Trình độ: 3</div>
                 </div>
 
             </div>
         </div>
-
         <div class="col-span-2 ...">
-
-            <!-- Right div -->
             <div id="right-div">
                 <div class="btn-group">
                     <span>
@@ -94,97 +73,84 @@
                         <button onclick="HidePersonalInfo('nhan-xet')" id="nhan-xet" class="btn"
                             style="width: 13%;">Nhận xét</button>
                         <button onclick="HidePersonalInfo('hoat-dong-tham-gia')" id="hoat-dong-tham-gia" class="btn"
-                            style="border-radius: 0 8px 0 0; width: 24%;">Hoạt động tham
-                            gia</button>
+                            style="border-radius: 0 8px 0 0; width: 24%;">Hoạt động tham gia</button>
                     </span>
                     <span>
                         <button
                             style="width: 10%; color: white; border-right: none; border-left: none; border-top: none; cursor: default;">-</button>
                     </span>
                 </div>
-
-                <!-- Personal information -->
                 <div id="personal-info">
                     <div class="my-4 info">Thông tin cá nhân</div>
                     <div class="indent">
-
                         <div class="grid grid-cols-3">
                             <div class="...">
                                 <div>Ngày sinh: 01/01/2023</div>
                                 <div>Số CMTND: 1234567890</div>
                                 <div>Dân tộc: KINH</div>
-                                <div>Ngày vào Đoàn: 01/01/2023</div>
+                                <div>Ngày vào Đoàn: 01/01/2000</div>
                             </div>
                             <div class="...">
-                                <div>Nơi sinh: BẮC GIANG</div>
-                                <div>Nơi cấp: BẮC GIANG</div>
+                                <div>Nơi sinh: HÀ NỘI</div>
+                                <div>Nơi cấp: HÀ NỘI</div>
                                 <div>Tôn giáo: KHÔNG</div>
-                                <div>Ngày vào Đảng:</div>
+                                <div>Ngày vào Đảng: 01/01/2000</div>
                             </div>
                             <div class="...">
                                 <div>Giới tính: Nam</div>
-                                <div>Ngày cấp:</div>
+                                <div>Ngày cấp: 01/01/2000</div>
                                 <div>Chi đoàn:</div>
                                 <div>Đoàn viên</div>
                             </div>
                         </div>
                         <div>Đối tượng chính sách:</div>
                         <div>Số thẻ bảo hiểm: 01234567890</div>
-                        <div>Địa chỉ thường trú: HUYỆN VIỆT YÊN, TỈNH BẮC GIANG</div>
-                        <div>Nơi ở hiện tại: Số 69, đường Thân Nhân Trung</div>
+                        <div>Địa chỉ thường trú: </div>
+                        <div>Nơi ở hiện tại: </div>
                     </div>
-
-                    <!-- Thông tin gia đình -->
                     <div class="my-4 info">Thông tin gia đình</div>
                     <div class="indent">
-
-                        <!-- Father -->
-                        <div class="mb-2"><b>Họ và tên cha: ELON MUSK</b></div>
+                        <div class="mb-2"><b>Họ và tên cha: </b></div>
                         <div class="grid grid-cols-3">
                             <div class="...">
-                                <div>Dân tộc: Kinh</div>
+                                <div>Dân tộc: </div>
                                 <div>Nơi làm việc:</div>
-
                             </div>
                             <div class="...">
-                                <div>Năm sinh: 1971</div>
+                                <div>Năm sinh: </div>
                                 <div>Tôn giáo:</div>
                             </div>
                             <div class="...">
-                                <div>Quốc tịch: VIỆT NAM</div>
-                                <div>Nghề nghiệp: Tỷ phú</div>
+                                <div>Quốc tịch: </div>
+                                <div>Nghề nghiệp: </div>
                             </div>
                         </div>
                         <div>Địa chỉ thường trú:</div>
-                        <div>Liên hệ: 1234567890</div>
-
-                        <!-- Mother -->
-                        <div class="my-3"><b>Họ và tên mẹ: TRẦN HÀ LINH</b></div>
+                        <div>Liên hệ: </div>
+                        <div class="my-3"><b>Họ và tên mẹ: </b></div>
                         <div class="grid grid-cols-3">
                             <div class="...">
-                                <div>Dân tộc: Kinh</div>
+                                <div>Dân tộc: </div>
                                 <div>Nơi làm việc:</div>
                             </div>
                             <div class="...">
-                                <div>Năm sinh: 1973</div>
+                                <div>Năm sinh: </div>
                                 <div>Tôn giáo:</div>
                             </div>
                             <div class="...">
-                                <div>Quốc tịch: VIỆT NAM</div>
+                                <div>Quốc tịch: </div>
                                 <div>Nghề nghiệp:</div>
                             </div>
                         </div>
-                        <div>Địa chỉ thường trú: 30 CỬA ĐÔNG, PHƯỜNG HÀNG MÃ, QUẬN HOÀN KIẾM, THÀNH PHỐ HÀ NỘI</div>
+                        <div>Địa chỉ thường trú: </div>
                         <div>Liên hệ:</div>
-
-                        <!-- Other relative information -->
                         <div class="my-3"><b>Thông tin người thân khác:</b></div>
                         <div class="grid grid-cols-2">
                             <div class="...">
-                                <div><b>Thuộc hộ:</b></div>
+                                <div class="font-bold">Thuộc hộ:</div>
                             </div>
                             <div class="...">
-                                <div><b>Số sổ:</b></div>
+                                <div class="font-bold">Số sổ:</div>
                             </div>
                         </div>
                     </div>
@@ -192,7 +158,6 @@
             </div>
         </div>
     </div>
-
 
     <!-- Chart -->
     <div class="grid grid-cols-2 gap-5" style="margin-top: 20px; margin-bottom: 60px;">
