@@ -14,7 +14,7 @@ const PORT = process.env.PORT || 3000;
 
 connect(
     process.env.MONGODB_URI ||
-    "mongodb+srv://hiepnt:hiepicthust@my-cluster.1aqvicz.mongodb.net/?retryWrites=true&w=majority",
+    "mongodb+srv://hoangk2hust:TP5OkwB7fIoT4Ubj@cluster0.w2dcpdj.mongodb.net/book",
     {
         useNewUrlParser: true,
         useUnifiedTopology: true,
