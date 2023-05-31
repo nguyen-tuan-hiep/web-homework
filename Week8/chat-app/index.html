@@ -1,281 +1,185 @@
-<!-- <!DOCTYPE html>
-<html>
-
-<head>
-  <title>Simple Messenger</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-    }
-
-    #user-list {
-      float: left;
-      width: 200px;
-      padding: 10px;
-      border: 1px solid #ccc;
-    }
-
-    #user-list ul {
-      list-style-type: none;
-      padding: 0;
-      margin: 0;
-    }
-
-    #user-list ul li {
-      cursor: pointer;
-      padding: 5px;
-    }
-
-    #user-list ul li:hover {
-      background-color: #eee;
-    }
-
-    #chat-window {
-      display: none;
-      margin-left: 220px;
-      padding: 10px;
-      border: 1px solid #ccc;
-    }
-
-    #chat-window ul {
-      list-style-type: none;
-      padding: 0;
-      margin: 0;
-    }
-
-    #chat-window ul li {
-      margin-bottom: 10px;
-    }
-  </style>
-</head>
-
-<body>
-  <div>
-    <h1 style="text-align: center;"></h1>
-  </div>
-  <div id="user-list">
-    <h3>Users</h3>
-    <ul id="users"></ul>
-  </div>
-  <div id="chat-window">
-    <h3 id="chat-header"></h3>
-    <ul id="messages"></ul>
-    <form id="message-form">
-      <input type="text" id="message-input" placeholder="Enter your message" />
-      <button type="submit">Send</button>
-    </form>
-  </div>
-
-  <script src="/socket.io/socket.io.js"></script>
-  <script>
-    const socket = io();
-
-    const userList = document.getElementById('users');
-    const chatWindow = document.getElementById('chat-window');
-    const chatHeader = document.getElementById('chat-header');
-    const messageForm = document.getElementById('message-form');
-    const messageInput = document.getElementById('message-input');
-    const messageList = document.getElementById('messages');
-
-    let selectedUser = '';
-
-    function createUserListItem(username) {
-      const listItem = document.createElement('li');
-      listItem.textContent = username;
-      listItem.addEventListener('click', () => {
-        selectedUser = username;
-        chatHeader.textContent = `Chat with ${selectedUser}`;
-        chatWindow.style.display = 'block';
-        messageList.innerHTML = '';
-        loadChatHistory(selectedUser);
-      });
-      return listItem;
-    }
-
-    messageForm.addEventListener('submit', (e) => {
-      e.preventDefault();
-      const message = messageInput.value.trim();
-      if (message && selectedUser) {
-        socket.emit('sendMessage', { recipient: selectedUser, message });
-        const messageItem = document.createElement('li');
-        messageItem.innerHTML = `<strong>You:</strong> ${message}`;
-        messageList.appendChild(messageItem);
-        messageInput.value = '';
-      }
-    });
-
-    socket.on('userList', (users) => {
-      userList.innerHTML = '';
-      users.forEach((username) => {
-        if (username !== socket.username) {
-          const listItem = createUserListItem(username);
-          userList.appendChild(listItem);
-        }
-      });
-    });
-
-    socket.on('newMessage', ({ sender, message }) => {
-      if (sender === selectedUser) {
-        const messageItem = document.createElement('li');
-        messageItem.innerHTML = `<strong>${sender}:</strong> ${message}`;
-        messageList.appendChild(messageItem);
-      }
-    });
-
-    const username = prompt('Enter your username:');
-    socket.emit('setUsername', username);
-
-    // Update header with user name
-    const header = document.querySelector('h1');
-    header.textContent = `I am ${username}`;
-  </script>
-</body>
-
-</html> -->
-
-
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
-  <title>Simple Messenger</title>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Socket.IO Chat</title>
   <style>
     body {
       font-family: Arial, sans-serif;
-    }
-
-    #user-list {
-      float: left;
-      width: 200px;
-      padding: 10px;
-      border: 1px solid #ccc;
-    }
-
-    #user-list ul {
-      list-style-type: none;
-      padding: 0;
       margin: 0;
+      padding: 20px;
+      background-color: #f5f5f5;
     }
 
-    #user-list ul li {
-      cursor: pointer;
-      padding: 5px;
+    #conversation {
+      margin: 20px auto;
+      padding: 20px;
+      width: 50%;
+      border-radius: 15px;
+      box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
     }
 
-    #user-list ul li:hover {
-      background-color: #eee;
+
+    h1 {
+      font-size: 24px;
+      margin-bottom: 20px;
+      text-align: center;
     }
 
-    #chat-window {
-      display: none;
-      margin-left: 220px;
-      padding: 10px;
-      border: 1px solid #ccc;
-    }
-
-    #chat-window ul {
-      list-style-type: none;
-      padding: 0;
-      margin: 0;
-    }
-
-    #chat-window ul li {
+    label {
+      font-weight: bold;
       margin-bottom: 10px;
+    }
+
+    #recipient {
+      width: 200px;
+      padding: 5px;
+      font-size: 16px;
+      margin-bottom: 10px;
+    }
+
+    #messages {
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+      max-height: 300px;
+      overflow-y: scroll;
+      background-color: #fff;
+      border: 1px solid #ccc;
+      padding: 10px;
+    }
+
+    #messages li {
+      margin-bottom: 10px;
+    }
+
+    #form {
+      display: flex;
+      margin-top: 20px;
+    }
+
+    #input {
+      flex: 1;
+      padding: 5px;
+      font-size: 16px;
+    }
+
+    #form button {
+      padding: 5px 10px;
+      font-size: 16px;
+      background-color: #4caf50;
+      color: #fff;
+      border: none;
+      cursor: pointer;
+    }
+
+    .sent-message {
+      color: #0645ad;
+    }
+
+    .received-message {
+      color: #0b8027;
+    }
+
+    .error-message {
+      color: #ff0000;
+    }
+
+    .container {
+      max-width: 600px;
+      margin: 0 auto;
+      background-color: #fff;
+      border-radius: 5px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+    }
+
+    .chat-title {
+      font-size: 20px;
+      font-weight: bold;
+      margin-bottom: 20px;
     }
   </style>
 </head>
+
 <body>
-  <div>
-    <h1 style="text-align: center;"></h1>
-  </div>
-  <div id="user-list">
-    <h3>Users</h3>
-    <ul id="users"></ul>
-  </div>
-  <div id="chat-window">
-    <h3 id="chat-header"></h3>
+  <div id="conversation">
+    <h1 id="yourname"></h1>
+    <label for="recipient">Select User:</label>
+    <select id="recipient"></select>
     <ul id="messages"></ul>
-    <form id="message-form">
-      <input type="text" id="message-input" placeholder="Enter your message" />
+    <form id="form">
+      <input type="text" id="input" autocomplete="off">
       <button type="submit">Send</button>
     </form>
   </div>
-
   <script src="/socket.io/socket.io.js"></script>
   <script>
     const socket = io();
+    const recipientSelect = document.getElementById('recipient');
+    const messages = document.getElementById('messages');
+    const form = document.getElementById('form');
+    const input = document.getElementById('input');
+    const name = document.getElementById('yourname');
 
-    const userList = document.getElementById('users');
-    const chatWindow = document.getElementById('chat-window');
-    const chatHeader = document.getElementById('chat-header');
-    const messageForm = document.getElementById('message-form');
-    const messageInput = document.getElementById('message-input');
-    const messageList = document.getElementById('messages');
+    // Display the username assigned by the server
+    socket.on('username', (username) => {
+      name.textContent = `Your Name: ${username}`;
+    });
 
-    let selectedUser = '';
-
-    function createUserListItem(username) {
-      const listItem = document.createElement('li');
-      listItem.textContent = username;
-      listItem.addEventListener('click', () => {
-        selectedUser = username;
-        chatHeader.textContent = `Chat with ${selectedUser}`;
-        chatWindow.style.display = 'block';
-        messageList.innerHTML = '';
-        loadChatHistory(selectedUser);
-      });
-      return listItem;
-    }
-
-    messageForm.addEventListener('submit', (e) => {
+    form.addEventListener('submit', (e) => {
       e.preventDefault();
-      const message = messageInput.value.trim();
-      if (message && selectedUser) {
-        socket.emit('sendMessage', { recipient: selectedUser, message });
-        const messageItem = document.createElement('li');
-        messageItem.innerHTML = `<strong>You:</strong> ${message}`;
-        messageList.appendChild(messageItem);
-        messageInput.value = '';
+      const recipient = recipientSelect.value;
+      const message = input.value;
+      if (recipient && message) {
+        if (recipient !== name.textContent.replace('Your Name: ', '')) {
+          socket.emit('chat', { to: recipient, message });
+          displayMessage(`Sent to ${recipient}: ${message}`, 'sent-message');
+        } else {
+          displayErrorMessage("You cannot chat with yourself.");
+        }
+        input.value = '';
       }
     });
 
     socket.on('userList', (users) => {
-      userList.innerHTML = '';
-      users.forEach((username) => {
-        if (username !== socket.username) {
-          const listItem = createUserListItem(username);
-          userList.appendChild(listItem);
-        }
+      recipientSelect.innerHTML = '';
+
+      users.forEach((user) => {
+        const option = document.createElement('option');
+        option.value = user;
+        option.textContent = user;
+        recipientSelect.appendChild(option);
       });
     });
 
-    socket.on('newMessage', ({ sender, message }) => {
-      if (sender === selectedUser) {
-        const messageItem = document.createElement('li');
-        messageItem.innerHTML = `<strong>${sender}:</strong> ${message}`;
-        messageList.appendChild(messageItem);
-      }
+    socket.on('privateMsg', ({ from, message }) => {
+      displayMessage(`Receive from ${from}: ${message}`, 'received-message');
     });
 
-    const username = prompt('Enter your username:');
-    socket.emit('setUsername', username);
+    socket.on('errorMessage', (message) => {
+      displayErrorMessage(message);
+    });
 
-    // Update header with user name
-    const header = document.querySelector('h1');
-    header.textContent = `I am ${username}`;
+    function displayMessage(text, className) {
+      const item = document.createElement('li');
+      item.textContent = text;
+      item.classList.add(className);
+      messages.appendChild(item);
+      window.scrollTo(0, document.body.scrollHeight);
+    }
 
-    function loadChatHistory(selectedUser) {
-      messageList.innerHTML = '';
-
-      // Check if chat history exists for the selected user
-      if (socket.username && chatHistory[socket.username] && chatHistory[socket.username][selectedUser]) {
-        const history = chatHistory[socket.username][selectedUser];
-        history.forEach(({ sender, message }) => {
-          const messageItem = document.createElement('li');
-          messageItem.innerHTML = `<strong>${sender}:</strong> ${message}`;
-          messageList.appendChild(messageItem);
-        });
-      }
+    function displayErrorMessage(message) {
+      const item = document.createElement('li');
+      item.textContent = `Error: ${message}`;
+      item.classList.add('error-message');
+      messages.appendChild(item);
+      window.scrollTo(0, document.body.scrollHeight);
     }
   </script>
 </body>
+
 </html>
