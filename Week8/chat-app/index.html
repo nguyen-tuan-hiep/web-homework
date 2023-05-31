@@ -1,0 +1,281 @@
+<!-- <!DOCTYPE html>
+<html>
+
+<head>
+  <title>Simple Messenger</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+    }
+
+    #user-list {
+      float: left;
+      width: 200px;
+      padding: 10px;
+      border: 1px solid #ccc;
+    }
+
+    #user-list ul {
+      list-style-type: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    #user-list ul li {
+      cursor: pointer;
+      padding: 5px;
+    }
+
+    #user-list ul li:hover {
+      background-color: #eee;
+    }
+
+    #chat-window {
+      display: none;
+      margin-left: 220px;
+      padding: 10px;
+      border: 1px solid #ccc;
+    }
+
+    #chat-window ul {
+      list-style-type: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    #chat-window ul li {
+      margin-bottom: 10px;
+    }
+  </style>
+</head>
+
+<body>
+  <div>
+    <h1 style="text-align: center;"></h1>
+  </div>
+  <div id="user-list">
+    <h3>Users</h3>
+    <ul id="users"></ul>
+  </div>
+  <div id="chat-window">
+    <h3 id="chat-header"></h3>
+    <ul id="messages"></ul>
+    <form id="message-form">
+      <input type="text" id="message-input" placeholder="Enter your message" />
+      <button type="submit">Send</button>
+    </form>
+  </div>
+
+  <script src="/socket.io/socket.io.js"></script>
+  <script>
+    const socket = io();
+
+    const userList = document.getElementById('users');
+    const chatWindow = document.getElementById('chat-window');
+    const chatHeader = document.getElementById('chat-header');
+    const messageForm = document.getElementById('message-form');
+    const messageInput = document.getElementById('message-input');
+    const messageList = document.getElementById('messages');
+
+    let selectedUser = '';
+
+    function createUserListItem(username) {
+      const listItem = document.createElement('li');
+      listItem.textContent = username;
+      listItem.addEventListener('click', () => {
+        selectedUser = username;
+        chatHeader.textContent = `Chat with ${selectedUser}`;
+        chatWindow.style.display = 'block';
+        messageList.innerHTML = '';
+        loadChatHistory(selectedUser);
+      });
+      return listItem;
+    }
+
+    messageForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const message = messageInput.value.trim();
+      if (message && selectedUser) {
+        socket.emit('sendMessage', { recipient: selectedUser, message });
+        const messageItem = document.createElement('li');
+        messageItem.innerHTML = `<strong>You:</strong> ${message}`;
+        messageList.appendChild(messageItem);
+        messageInput.value = '';
+      }
+    });
+
+    socket.on('userList', (users) => {
+      userList.innerHTML = '';
+      users.forEach((username) => {
+        if (username !== socket.username) {
+          const listItem = createUserListItem(username);
+          userList.appendChild(listItem);
+        }
+      });
+    });
+
+    socket.on('newMessage', ({ sender, message }) => {
+      if (sender === selectedUser) {
+        const messageItem = document.createElement('li');
+        messageItem.innerHTML = `<strong>${sender}:</strong> ${message}`;
+        messageList.appendChild(messageItem);
+      }
+    });
+
+    const username = prompt('Enter your username:');
+    socket.emit('setUsername', username);
+
+    // Update header with user name
+    const header = document.querySelector('h1');
+    header.textContent = `I am ${username}`;
+  </script>
+</body>
+
+</html> -->
+
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Simple Messenger</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+    }
+
+    #user-list {
+      float: left;
+      width: 200px;
+      padding: 10px;
+      border: 1px solid #ccc;
+    }
+
+    #user-list ul {
+      list-style-type: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    #user-list ul li {
+      cursor: pointer;
+      padding: 5px;
+    }
+
+    #user-list ul li:hover {
+      background-color: #eee;
+    }
+
+    #chat-window {
+      display: none;
+      margin-left: 220px;
+      padding: 10px;
+      border: 1px solid #ccc;
+    }
+
+    #chat-window ul {
+      list-style-type: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    #chat-window ul li {
+      margin-bottom: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div>
+    <h1 style="text-align: center;"></h1>
+  </div>
+  <div id="user-list">
+    <h3>Users</h3>
+    <ul id="users"></ul>
+  </div>
+  <div id="chat-window">
+    <h3 id="chat-header"></h3>
+    <ul id="messages"></ul>
+    <form id="message-form">
+      <input type="text" id="message-input" placeholder="Enter your message" />
+      <button type="submit">Send</button>
+    </form>
+  </div>
+
+  <script src="/socket.io/socket.io.js"></script>
+  <script>
+    const socket = io();
+
+    const userList = document.getElementById('users');
+    const chatWindow = document.getElementById('chat-window');
+    const chatHeader = document.getElementById('chat-header');
+    const messageForm = document.getElementById('message-form');
+    const messageInput = document.getElementById('message-input');
+    const messageList = document.getElementById('messages');
+
+    let selectedUser = '';
+
+    function createUserListItem(username) {
+      const listItem = document.createElement('li');
+      listItem.textContent = username;
+      listItem.addEventListener('click', () => {
+        selectedUser = username;
+        chatHeader.textContent = `Chat with ${selectedUser}`;
+        chatWindow.style.display = 'block';
+        messageList.innerHTML = '';
+        loadChatHistory(selectedUser);
+      });
+      return listItem;
+    }
+
+    messageForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const message = messageInput.value.trim();
+      if (message && selectedUser) {
+        socket.emit('sendMessage', { recipient: selectedUser, message });
+        const messageItem = document.createElement('li');
+        messageItem.innerHTML = `<strong>You:</strong> ${message}`;
+        messageList.appendChild(messageItem);
+        messageInput.value = '';
+      }
+    });
+
+    socket.on('userList', (users) => {
+      userList.innerHTML = '';
+      users.forEach((username) => {
+        if (username !== socket.username) {
+          const listItem = createUserListItem(username);
+          userList.appendChild(listItem);
+        }
+      });
+    });
+
+    socket.on('newMessage', ({ sender, message }) => {
+      if (sender === selectedUser) {
+        const messageItem = document.createElement('li');
+        messageItem.innerHTML = `<strong>${sender}:</strong> ${message}`;
+        messageList.appendChild(messageItem);
+      }
+    });
+
+    const username = prompt('Enter your username:');
+    socket.emit('setUsername', username);
+
+    // Update header with user name
+    const header = document.querySelector('h1');
+    header.textContent = `I am ${username}`;
+
+    function loadChatHistory(selectedUser) {
+      messageList.innerHTML = '';
+
+      // Check if chat history exists for the selected user
+      if (socket.username && chatHistory[socket.username] && chatHistory[socket.username][selectedUser]) {
+        const history = chatHistory[socket.username][selectedUser];
+        history.forEach(({ sender, message }) => {
+          const messageItem = document.createElement('li');
+          messageItem.innerHTML = `<strong>${sender}:</strong> ${message}`;
+          messageList.appendChild(messageItem);
+        });
+      }
+    }
+  </script>
+</body>
+</html>
